@@ -6,35 +6,34 @@
 <style>
   :root{
     color-scheme: light;
-    /* JP58 integrated palette */
-    --bg:#F4F1EC;
-    --card:#FDFAF6;
-    --olive:#5E887E;
-    --olive-deep:#3D6B62;
-    --olive-tint:#EAF2F0;
-    --terracotta:#B8965A;
-    --terracotta-tint:#FBF3E0;
-    --gold:#C9A87C;
-    --gold-tint:#F5EBD8;
-    --text:#1B2B3A;
-    --text-muted:#7A7770;
-    --border:#DDD8D0;
+    --bg:#FFFFFF;
+    --card:#FCFBF8;
+    --olive:#5F6B58;
+    --olive-deep:#4A5443;
+    --olive-tint:#EEF1EA;
+    --terracotta:#A15C45;
+    --terracotta-tint:#F3E5DD;
+    --gold:#B8905A;
+    --gold-tint:#F5EBDC;
+    --text:#2D2D2D;
+    --text-muted:#6E6E6E;
+    --border:#E6DDD1;
     --catalyst-red:#C24A3B;
     --catalyst-red-tint:#FBEAE7;
     --catalyst-red-border:#E3B0A6;
     --motion-yellow:#B8892B;
     --motion-yellow-tint:#FDF6E1;
     --motion-yellow-border:#E8CE87;
-    --rhythm-green:#5E887E;
-    --rhythm-green-tint:#EAF2F0;
-    --rhythm-green-border:#A7C7C0;
-    --quarter-block:#1B2B3A;
+    --rhythm-green:#5C7A4A;
+    --rhythm-green-tint:#EDF3E7;
+    --rhythm-green-border:#C1D6AF;
+    --quarter-block:#3A4238;
     --font-serif:'Cormorant Garamond','Canela',Georgia,'Times New Roman',serif;
-    --font-sans:'Jost',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);padding:0 0 64px;-webkit-font-smoothing:antialiased;font-weight:300;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);padding:0 0 64px;-webkit-font-smoothing:antialiased;}
   em{font-style:italic;}
 
   @keyframes fadeInUp{
@@ -55,7 +54,7 @@
     animation:fadeInUp 400ms ease both;
   }
   .lock-wordmark{font-family:var(--font-serif);font-size:28px;color:var(--text);margin-bottom:6px;}
-  .lock-wordmark em{color:var(--gold);font-weight:400;}
+  .lock-wordmark em{color:var(--terracotta);font-weight:400;}
   .lock-eyebrow{font-family:var(--font-sans);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:24px;}
   .lock-rule{height:1px;background:var(--border);width:48px;margin:0 auto 28px;}
   .lock-form input[type=password]{
@@ -72,9 +71,9 @@
 
   .wrap{max-width:1240px;margin:0 auto;padding:56px 32px 10px;}
   .header{text-align:center;margin-bottom:8px;animation:fadeInUp 400ms ease both;}
-  .tier-label{font-family:var(--font-sans);font-size:10px;letter-spacing:.14em;color:var(--text-muted);text-transform:uppercase;margin-bottom:18px;font-weight:500;}
+  .tier-label{font-family:var(--font-sans);font-size:11px;letter-spacing:3px;color:var(--text-muted);text-transform:uppercase;margin-bottom:18px;font-weight:500;}
   .wordmark{font-family:var(--font-serif);font-size:46px;font-weight:500;color:var(--text);line-height:1;letter-spacing:.2px;}
-  .wordmark em{color:var(--gold);font-weight:400;font-style:italic;}
+  .wordmark em{color:var(--terracotta);font-weight:400;}
   .plan-subtitle{font-family:var(--font-serif);font-size:17px;color:var(--text-muted);margin-top:10px;letter-spacing:.3px;}
   .plan-subtitle em{color:var(--olive);}
   .rule{height:1px;background:var(--border);width:64px;margin:28px auto 0;}
@@ -96,7 +95,7 @@
   .progress-row{max-width:420px;margin:0 auto 52px;animation:fadeInUp 450ms ease 100ms both;}
   .progress-label{text-align:center;font-family:var(--font-sans);font-size:12px;color:var(--text-muted);margin-bottom:8px;letter-spacing:.2px;}
   .progress-bar{height:3px;background:var(--border);border-radius:4px;overflow:hidden;}
-  .progress-fill{height:100%;background:var(--quarter-block);width:0%;transition:width 300ms ease;}
+  .progress-fill{height:100%;background:var(--olive);width:0%;transition:width 300ms ease;}
 
   .purpose{border:1px solid var(--border);background:var(--card);border-radius:16px;padding:24px 30px;font-family:var(--font-serif);font-style:italic;font-size:17px;line-height:1.65;color:var(--text-muted);margin-bottom:40px;box-shadow:0 1px 2px rgba(45,45,45,.03), 0 12px 28px rgba(45,45,45,.04);animation:fadeInUp 450ms ease 140ms both;}
 
@@ -148,7 +147,7 @@
     transition:all 200ms ease;
   }
   input[type=checkbox]:hover{border-color:var(--olive);}
-  input[type=checkbox]:checked{background:var(--quarter-block);border-color:var(--olive);}
+  input[type=checkbox]:checked{background:var(--olive);border-color:var(--olive);}
   input[type=checkbox]:checked::after{
     content:'';position:absolute;left:5px;top:1px;
     width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;
@@ -182,7 +181,7 @@
   .btn-pill{
     font-family:var(--font-sans);font-size:13px;font-weight:500;
     letter-spacing:.2px;
-    background:var(--quarter-block);color:#fff;
+    background:var(--olive);color:#fff;
     border:1px solid var(--olive);
     border-radius:999px;
     padding:11px 22px;
@@ -191,7 +190,7 @@
     transition:all 200ms ease;
     white-space:nowrap;
   }
-  .btn-pill:hover{background:var(--quarter-block);border-color:var(--olive-deep);}
+  .btn-pill:hover{background:var(--olive-deep);border-color:var(--olive-deep);}
   .btn-pill.ghost{background:#fff;color:var(--olive-deep);}
   .btn-pill svg{flex-shrink:0;}
 
@@ -272,15 +271,6 @@
     .roadmap-arrow{transform:rotate(90deg);padding:2px 0;}
   }
 
-
-  /* ALL CARDS COLLAPSIBLE */
-  .card-header{display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;user-select:none;}
-  .card-toggle{background:none;border:none;cursor:pointer;color:var(--text-muted);padding:4px 6px;border-radius:6px;transition:all .2s;flex-shrink:0;line-height:1;}
-  .card-toggle:hover{background:var(--olive-tint);color:var(--olive);}
-  .card-toggle svg{display:block;transition:transform .25s ease;width:16px;height:16px;}
-  .card.collapsed .card-toggle svg{transform:rotate(-90deg);}
-  .card-body{overflow:hidden;transition:max-height .3s ease, opacity .25s ease;max-height:2000px;opacity:1;}
-  .card.collapsed .card-body{max-height:0;opacity:0;}
   .collapse-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;cursor:pointer;}
   .collapse-header .concept-def{margin-bottom:0;}
   .chevron-btn{background:none;border:none;cursor:pointer;color:var(--text-muted);padding:7px;border-radius:8px;transition:all 200ms ease;flex-shrink:0;margin-top:2px;}
@@ -304,7 +294,7 @@
   .tab-nav{display:flex;gap:10px;justify-content:center;margin:0 0 36px;flex-wrap:wrap;animation:fadeInUp 450ms ease 80ms both;}
   .tab-btn{font-family:var(--font-sans);font-size:13px;font-weight:600;letter-spacing:.3px;padding:11px 22px;border-radius:999px;border:1px solid var(--border);background:#fff;color:var(--text-muted);cursor:pointer;transition:all .2s ease;}
   .tab-btn:hover{border-color:var(--olive);color:var(--olive-deep);}
-  .tab-btn.active{background:var(--quarter-block);border-color:var(--olive);color:#fff;}
+  .tab-btn.active{background:var(--olive);border-color:var(--olive);color:#fff;}
   .tab-panel{display:none;}
   .tab-panel.active{display:block;animation:fadeInUp 350ms ease both;}
 
@@ -402,19 +392,9 @@
     .card .adv,.card .delc{display:none;}
   }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div style="background:#1B2B3A;padding:10px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
-  <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:#C9A87C;letter-spacing:.08em;">Goals <em style="font-style:italic;">&amp; Business Plan</em> · 2026</div>
-  <a href="https://jp58.netlify.app" style="font-family:'Jost',sans-serif;font-size:11px;color:rgba(245,240,232,.5);text-decoration:none;letter-spacing:.08em;border:1px solid rgba(255,255,255,.1);padding:4px 14px;border-radius:20px;transition:all .2s;" onmouseover="this.style.color='#C9A87C';this.style.borderColor='rgba(201,168,124,.4)'" onmouseout="this.style.color='rgba(245,240,232,.5)';this.style.borderColor='rgba(255,255,255,.1)'">← JP58</a>
-</div>
-<div style="background:#1B2B3A;padding:11px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;">
-  <div style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;color:#C9A87C;letter-spacing:.06em;">Goals <em style="font-style:italic;font-weight:300;">&amp; Business Plan</em> · 2026</div>
-  <a href="https://jp58.netlify.app" style="font-family:'Jost',sans-serif;font-size:11px;color:rgba(245,240,232,.5);text-decoration:none;letter-spacing:.08em;border:1px solid rgba(255,255,255,.1);padding:4px 16px;border-radius:20px;transition:all .2s;" onmouseover="this.style.color='#C9A87C';this.style.borderColor='rgba(201,168,124,.4)'" onmouseout="this.style.color='rgba(245,240,232,.5)';this.style.borderColor='rgba(255,255,255,.1)'">← JP58</a>
-</div>
 <div class="lock-screen" id="lock-screen">
   <div class="lock-card">
     <div class="lock-wordmark">The <em>58</em> Group</div>
@@ -1008,14 +988,6 @@ function loadState(){
   let state = null;
   if(raw){ try{ state = JSON.parse(raw); }catch(e){ state = null; } }
   if(!state) state = {};
-  // Seed closed sales from PDF if empty
-  if(!state.sales || state.sales.length === 0){
-    state.sales = SALES_SEED;
-  }
-  // Seed pipeline from PDF if empty  
-  if(!state.pipeline || state.pipeline.length === 0){
-    state.pipeline = PIPELINE_SEED;
-  }
   Object.keys(DEFAULTS).forEach(k=>{
     if(!state[k]) state[k] = DEFAULTS[k].map(text=>({text, checked:false}));
   });
@@ -1329,32 +1301,6 @@ renderAll();
 /* ================= BUSINESS PLAN 2026 (isolated scope) ================= */
 (function(){
   const ICON_X = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
-  
-  // ── SEED DATA — recovered from PDF Aug 10 2026 ──────
-  const SALES_SEED = [
-    {date:'02/12/2026', property:'8038 Broadway', price:105000, commPct:3, commission:3150, source:'Past Client', role:'Listing'},
-    {date:'01/27/2026', property:'00 Sky Oak', price:80000, commPct:3, commission:2400, source:'Past Client', role:'Listing'},
-    {date:'01/16/2026', property:'4011 Flint Creek', price:2050, commPct:50, commission:600, source:'Past Client', role:'Listing'},
-    {date:'03/18/2026', property:'22012 Royal Troon', price:2400, commPct:50, commission:700, source:'Past Client', role:'Listing'},
-    {date:'04/25/2026', property:'7 Cheeswood', price:2400, commPct:50, commission:750, source:'Past Client', role:'Listing'},
-    {date:'06/08/2026', property:'1505 Candy Lane', price:235000, commPct:2.5, commission:5875, source:'Referral', role:'Listing'},
-    {date:'06/18/2026', property:'21579 Tims Harbor', price:359000, commPct:2.5, commission:8975, source:'Past Client', role:'Listing'},
-    {date:'07/27/2026', property:'2623 Longleaf Pines', price:1800, commPct:670, commission:670, source:'Past Client', role:'Listing'},
-  ];
-
-  const PIPELINE_SEED = [
-    {property:'20719 Rio Villa Drive', type:'Listing', status:'Active', price:439900, commPct:3, commission:13197, date:''},
-    {property:'20215 Rio Villa Drive', type:'Listing', status:'Active', price:299000, commPct:3, commission:8970, date:''},
-    {property:'Gabriel & Macarena', type:'Buyer', status:'Searching', price:0, commPct:0, commission:0, date:''},
-    {property:'Eduardo & Ondina Zambrano', type:'Buyer', status:'Searching', price:0, commPct:0, commission:0, date:''},
-    {property:'Cintia & Daina', type:'Buyer', status:'Searching', price:0, commPct:0, commission:0, date:''},
-    {property:'Keygate', type:'Listing', status:'Coming Soon', price:0, commPct:0, commission:0, date:''},
-    {property:'Juan Jaramillo | 10110 Red W', type:'Listing', status:'Coming Soon', price:0, commPct:0, commission:0, date:''},
-    {property:'Luis Jasso & Maria Herrera', type:'Buyer', status:'Searching', price:0, commPct:0, commission:0, date:''},
-    {property:'Art Lopez | 129 E Sunnyside', type:'Listing', status:'Active', price:0, commPct:0, commission:0, date:''},
-  ];
-  // ── END SEED DATA ────────────────────────────────────
-
   const STORAGE_KEY = "biz_plan_2026_v1";
   const LISTING_STATUSES = ["Coming Soon","Active","Under Contract","Pending","Closed"];
   const BUYER_STATUSES = ["Searching","Under Contract","Pending","Closed"];
@@ -1411,13 +1357,6 @@ renderAll();
   }
   let state = loadState();
   function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-
-    // Seed from PDF data if empty
-    if(!state.sales || state.sales.length === 0) state.sales = SALES_SEED;
-    if(!state.pipeline || state.pipeline.length === 0) state.pipeline = PIPELINE_SEED;
-    // Save seeded state
-    if((!state.sales_seeded)) { state.sales_seeded = true; localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-
 
   function fmt$(n){ if(!isFinite(n)) return "—"; return "$"+Math.round(n).toLocaleString("en-US"); }
   function fmtN(n, d){ if(!isFinite(n)) return "—"; return n.toLocaleString("en-US",{minimumFractionDigits:d||0,maximumFractionDigits:d||0}); }
@@ -1909,96 +1848,5 @@ renderAll();
   renderPnL();
 })();
 </script>
-
-// Make all .card sections collapsible
-(function(){
-  // Save collapsed state
-  function getState(){try{return JSON.parse(localStorage.getItem('goals-collapsed')||'{}');}catch{return {};}}
-  function setState(s){try{localStorage.setItem('goals-collapsed',JSON.stringify(s));}catch{}}
-
-  document.querySelectorAll('section.card, div.card').forEach((card, idx) => {
-    // Find the title element inside — first h2, h3, or .section-eyebrow
-    const titleEl = card.querySelector('h2,h3,.section-eyebrow,.eyebrow');
-    if(!titleEl) return;
-
-    // Get the header area — wrap title in a card-header div if not already
-    const state = getState();
-    const cardId = card.id || ('card-auto-'+idx);
-    card.id = cardId;
-
-    // Wrap title line in clickable header
-    const firstChild = card.firstElementChild;
-
-    // Create toggle button
-    const toggleBtn = document.createElement('button');
-    toggleBtn.className = 'card-toggle';
-    toggleBtn.setAttribute('type','button');
-    toggleBtn.setAttribute('aria-label','Toggle section');
-    toggleBtn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4,6 8,10 12,6"/></svg>';
-
-    // Find header row — eyebrow + title combo
-    const eyebrow = card.querySelector('.section-eyebrow, .eyebrow, .tier-label');
-    const headerAnchor = eyebrow || titleEl;
-    const headerParent = headerAnchor.parentElement;
-
-    // Wrap header elements in card-header
-    const header = document.createElement('div');
-    header.className = 'card-header';
-
-    // Collect header elements (eyebrow + title)
-    const headerEls = [];
-    if(eyebrow && eyebrow !== titleEl) headerEls.push(eyebrow);
-    headerEls.push(titleEl);
-
-    // Insert header before first header element
-    headerParent.insertBefore(header, headerEls[0]);
-    const headerContent = document.createElement('div');
-    headerEls.forEach(el => headerContent.appendChild(el));
-    header.appendChild(headerContent);
-    header.appendChild(toggleBtn);
-
-    // Wrap remaining content in card-body
-    const body = document.createElement('div');
-    body.className = 'card-body';
-    while(card.children.length > 0 && card.children[0] !== header){
-      // shouldn't happen
-    }
-    // Move everything after header into body
-    const children = Array.from(card.children).filter(c => c !== header);
-    children.forEach(c => body.appendChild(c));
-    card.appendChild(body);
-
-    // Restore collapsed state
-    if(state[cardId]){
-      card.classList.add('collapsed');
-    }
-
-    // Toggle on click
-    header.addEventListener('click', () => {
-      card.classList.toggle('collapsed');
-      const s = getState();
-      s[cardId] = card.classList.contains('collapsed');
-      setState(s);
-    });
-  });
-
-  // Also add collapse-all / expand-all button
-  const wrap = document.querySelector('.wrap');
-  if(wrap){
-    const bar = document.createElement('div');
-    bar.style.cssText = 'display:flex;justify-content:flex-end;gap:8px;margin-bottom:16px;';
-    bar.innerHTML = `
-      <button onclick="document.querySelectorAll('.card').forEach(c=>c.classList.add('collapsed'))" 
-        style="font-family:'Jost',sans-serif;font-size:11px;padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--text-muted);cursor:pointer;letter-spacing:.06em;">
-        Collapse all
-      </button>
-      <button onclick="document.querySelectorAll('.card').forEach(c=>c.classList.remove('collapsed'))"
-        style="font-family:'Jost',sans-serif;font-size:11px;padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--text-muted);cursor:pointer;letter-spacing:.06em;">
-        Expand all
-      </button>`;
-    wrap.insertBefore(bar, wrap.firstChild);
-  }
-})();
-
 </body>
 </html>
