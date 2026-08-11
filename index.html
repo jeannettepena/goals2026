@@ -829,6 +829,12 @@ const SITE_PASSWORD = "5858";
 function showApp(){
   document.getElementById("lock-screen").style.display = "none";
   document.getElementById("app-content").style.display = "";
+  // Load fresh data from Supabase every time app is shown
+  setTimeout(function(){
+    if(typeof loadFromSupabase === 'function'){
+      loadFromSupabase().catch(e => console.warn('SB load error:', e));
+    }
+  }, 400);
 }
 function showLock(){
   document.getElementById("lock-screen").style.display = "flex";
