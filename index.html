@@ -1382,47 +1382,40 @@ renderAll();
 
   // Load from Supabase and merge — async, runs after initial render
   async function loadFromSupabase(){
-    const sb = getSB(); if(!sb) return;
+    const SB = 'https://kiqxkbwnfqlkeaexqihl.supabase.co';
+    const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpcXhrYnduZnFsa2VhZXhxaWhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyNjYwOTEsImV4cCI6MjA5NTg0MjA5MX0.1n8CV8zzRbk_HMeUvwx3mjyzZNPiBcGvBRvaGZgnECE';
+    const h = {'apikey': KEY, 'Authorization': 'Bearer ' + KEY};
     try {
-      const [planRes, salesRes, pipeRes] = await Promise.all([
-        sb.from('goals_2026_plan').select('data').eq('id','main').maybeSingle(),
-        sb.from('goals_2026_sales').select('*').order('date'),
-        sb.from('goals_2026_pipeline').select('*').order('created_at')
+      const [salesRes, pipeRes] = await Promise.all([
+        fetch(SB+'/rest/v1/goals_2026_sales?order=date', {headers: h}).then(r=>r.json()),
+        fetch(SB+'/rest/v1/goals_2026_pipeline?order=created_at', {headers: h}).then(r=>r.json())
       ]);
-      if(planRes.data?.data){
-        const p = planRes.data.data;
-        if(p.income1) state.income1 = p.income1;
-        if(p.activityMeta) state.activityMeta = p.activityMeta;
-        if(p.activities) state.activities = p.activities;
-      }
-      if(salesRes.data){
-        state.sales = salesRes.data.map(r => ({
+      if(Array.isArray(salesRes) && salesRes.length > 0){
+        state.sales = salesRes.map(r => ({
           _id: r.id,
           date: r.date||'',
           property: r.property||'',
-          price: r.price||0,
-          commPct: r.comm_pct||0,
-          commission: r.commission||0,
+          price: Number(r.price)||0,
+          commPct: Number(r.comm_pct)||0,
+          commission: Number(r.commission)||0,
           source: r.source||'',
           role: r.role||''
         }));
       }
-      if(pipeRes.data){
-        state.pipeline = pipeRes.data.map(r => ({
+      if(Array.isArray(pipeRes) && pipeRes.length > 0){
+        state.pipeline = pipeRes.map(r => ({
           _id: r.id,
           property: r.property||'',
           type: r.type||'Listing',
           status: r.status||'Active',
-          price: r.price||0,
-          commPct: r.comm_pct||0,
-          commission: r.commission||0,
+          price: Number(r.price)||0,
+          commPct: Number(r.comm_pct)||0,
+          commission: Number(r.commission)||0,
           closeDate: r.close_date||''
         }));
       }
-      // Re-render after Supabase load
       renderSales(); renderPipeline(); computeProgress();
-      updateActivityRows(); updateIncomeCalc();
-    } catch(e){ console.warn('Supabase load failed, using localStorage', e); }
+    } catch(e){ console.warn('Supabase load failed:', e); }
   }
 
   async function savePlan(){
