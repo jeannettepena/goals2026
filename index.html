@@ -1308,9 +1308,15 @@ renderAll();
   let sbClient = null;
   function getSB(){
     if(sbClient) return sbClient;
-    if(window.supabase && window.supabase.createClient){
-      sbClient = window.supabase.createClient(SB_URL, SB_KEY);
-    }
+    try {
+      // Try different ways Supabase JS might be exposed
+      const sb = window.supabase || window.Supabase;
+      if(sb && sb.createClient){
+        sbClient = sb.createClient(SB_URL, SB_KEY);
+      } else if(typeof createClient !== 'undefined'){
+        sbClient = createClient(SB_URL, SB_KEY);
+      }
+    } catch(e){ console.warn('Supabase init failed:', e); }
     return sbClient;
   }
   const LISTING_STATUSES = ["Coming Soon","Active","Under Contract","Pending","Closed"];
