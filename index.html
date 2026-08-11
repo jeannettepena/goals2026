@@ -1302,6 +1302,16 @@ renderAll();
 (function(){
   const ICON_X = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
   const STORAGE_KEY = "biz_plan_2026_v1";
+  const SB_URL = 'https://kiqxkbwnfqlkeaexqihl.supabase.co';
+  const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpcXhrYnduZnFsa2VhZXhxaWhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyNjYwOTEsImV4cCI6MjA5NTg0MjA5MX0.1n8CV8zzRbk_HMeUvwx3mjyzZNPiBcGvBRvaGZgnECE';
+  let sbClient = null;
+  function getSB(){
+    if(sbClient) return sbClient;
+    if(window.supabase && window.supabase.createClient){
+      sbClient = window.supabase.createClient(SB_URL, SB_KEY);
+    }
+    return sbClient;
+  }
   const LISTING_STATUSES = ["Coming Soon","Active","Under Contract","Pending","Closed"];
   const BUYER_STATUSES = ["Searching","Under Contract","Pending","Closed"];
   const LEASE_STATUSES = ["Available","Showing","Application Pending","Leased","Closed"];
@@ -1356,7 +1366,96 @@ renderAll();
     return s;
   }
   let state = loadState();
-  function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+  // Load from Supabase and merge — async, runs after initial render
+  async function loadFromSupabase(){
+    const sb = getSB(); if(!sb) return;
+    try {
+      const [planRes, salesRes, pipeRes] = await Promise.all([
+        sb.from('goals_2026_plan').select('data').eq('id','main').maybeSingle(),
+        sb.from('goals_2026_sales').select('*').order('date'),
+        sb.from('goals_2026_pipeline').select('*').order('created_at')
+      ]);
+      if(planRes.data?.data){
+        const p = planRes.data.data;
+        if(p.income1) state.income1 = p.income1;
+        if(p.activityMeta) state.activityMeta = p.activityMeta;
+        if(p.activities) state.activities = p.activities;
+      }
+      if(salesRes.data){
+        state.sales = salesRes.data.map(r => ({
+          _id: r.id,
+          date: r.date||'',
+          property: r.property||'',
+          price: r.price||0,
+          commPct: r.comm_pct||0,
+          commission: r.commission||0,
+          source: r.source||'',
+          role: r.role||''
+        }));
+      }
+      if(pipeRes.data){
+        state.pipeline = pipeRes.data.map(r => ({
+          _id: r.id,
+          property: r.property||'',
+          type: r.type||'Listing',
+          status: r.status||'Active',
+          price: r.price||0,
+          commPct: r.comm_pct||0,
+          commission: r.commission||0,
+          closeDate: r.close_date||''
+        }));
+      }
+      // Re-render after Supabase load
+      renderSales(); renderPipeline(); computeProgress();
+      updateActivityRows(); updateIncomeCalc();
+    } catch(e){ console.warn('Supabase load failed, using localStorage', e); }
+  }
+
+  async function savePlan(){
+    // Save plan metadata to Supabase
+    const sb = getSB(); if(!sb) return;
+    const planData = {
+      income1: state.income1,
+      activityMeta: state.activityMeta,
+      activities: state.activities
+    };
+    await sb.from('goals_2026_plan').upsert({id:'main', data: planData, updated_at: new Date().toISOString()});
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); // keep localStorage in sync
+  }
+
+  async function saveSaleToSB(sale){
+    const sb = getSB(); if(!sb) return null;
+    const row = {date: sale.date, property: sale.property, price: sale.price||0, comm_pct: sale.commPct||0, commission: sale.commission||0, source: sale.source||'', role: sale.role||''};
+    if(sale._id){
+      await sb.from('goals_2026_sales').update(row).eq('id', sale._id);
+      return sale._id;
+    } else {
+      const {data} = await sb.from('goals_2026_sales').insert(row).select('id').maybeSingle();
+      return data?.id;
+    }
+  }
+
+  async function deleteSaleFromSB(id){ const sb = getSB(); if(sb && id) await sb.from('goals_2026_sales').delete().eq('id', id); }
+
+  async function savePipelineToSB(deal){
+    const sb = getSB(); if(!sb) return null;
+    const row = {property: deal.property, type: deal.type||'Listing', status: deal.status||'Active', price: deal.price||0, comm_pct: deal.commPct||0, commission: deal.commission||0, close_date: deal.closeDate||''};
+    if(deal._id){
+      await sb.from('goals_2026_pipeline').update(row).eq('id', deal._id);
+      return deal._id;
+    } else {
+      const {data} = await sb.from('goals_2026_pipeline').insert(row).select('id').maybeSingle();
+      return data?.id;
+    }
+  }
+
+  async function deletePipelineFromSB(id){ const sb = getSB(); if(sb && id) await sb.from('goals_2026_pipeline').delete().eq('id', id); }
+
+  function save(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    savePlan(); // async, non-blocking
+  }
 
   function fmt$(n){ if(!isFinite(n)) return "—"; return "$"+Math.round(n).toLocaleString("en-US"); }
   function fmtN(n, d){ if(!isFinite(n)) return "—"; return n.toLocaleString("en-US",{minimumFractionDigits:d||0,maximumFractionDigits:d||0}); }
@@ -1612,7 +1711,7 @@ renderAll();
 
     const delTd = document.createElement("td");
     const delBtn = document.createElement("button"); delBtn.className="act-del"; delBtn.innerHTML=ICON_X;
-    delBtn.addEventListener("click", ()=>{ state.sales.splice(idx,1); save(); renderSales(); });
+    delBtn.addEventListener("click", ()=>{ const s = state.sales[idx]; if(s._id) deleteSaleFromSB(s._id); state.sales.splice(idx,1); save(); renderSales(); });
     delTd.appendChild(delBtn); tr.appendChild(delTd);
 
     return tr;
@@ -1634,7 +1733,9 @@ renderAll();
     computeProgress();
   }
   document.getElementById("sales-add-btn").addEventListener("click", ()=>{
-    state.sales.push({ date:"", property:"", price:0, commPct:0, commission:0, source:"", role:"Listing Sale" });
+    const newSale = { date:"", property:"", price:0, commPct:0, commission:0, source:"", role:"Listing Sale" };
+    state.sales.push(newSale);
+    saveSaleToSB(newSale).then(id => { if(id) newSale._id = id; });
     save(); renderSales();
   });
 
@@ -1737,7 +1838,7 @@ renderAll();
 
     const delTd = document.createElement("td");
     const delBtn = document.createElement("button"); delBtn.className="act-del"; delBtn.innerHTML=ICON_X;
-    delBtn.addEventListener("click", ()=>{ state.pipeline.splice(idx,1); save(); renderPipeline(); });
+    delBtn.addEventListener("click", ()=>{ const d = state.pipeline[idx]; if(d._id) deletePipelineFromSB(d._id); state.pipeline.splice(idx,1); save(); renderPipeline(); });
     delTd.appendChild(delBtn); tr.appendChild(delTd);
 
     return tr;
@@ -1756,7 +1857,9 @@ renderAll();
     document.getElementById("pipeline-total-comm").textContent = fmt$(totalComm);
   }
   document.getElementById("pipeline-add-btn").addEventListener("click", ()=>{
-    state.pipeline.push({ property:"", type:"Listing", status:"Active", price:0, commPct:0, commission:0, closeDate:"" });
+    const newDeal = { property:"", type:"Listing", status:"Active", price:0, commPct:0, commission:0, closeDate:"" };
+    state.pipeline.push(newDeal);
+    savePipelineToSB(newDeal).then(id => { if(id) newDeal._id = id; });
     save(); renderPipeline();
   });
 
