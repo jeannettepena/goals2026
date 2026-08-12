@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jeannette Peña — The 58 Group — Workspace 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light;
+    /* Fifty Eight ecosystem palette — matching JP58 / 58 HUB / 58 Clients & Properties */
+    --navy:#1B2B3A;
+    --navy-2:#243647;
+    --navy-deep:#12202C;
+    --champ:#C9A87C;
+    --champ-2:#D4B98A;
+    --champ-wash:#F5EBD8;
+    --teal:#5E887E;
+    --teal-wash:#EAF2F0;
+    --cream:#F4F1EC;
+    --paper:#FDFAF6;
+    --ink:#1B2B3A;
+    --ink3:#7A7770;
+    --danger:#B5675A;
+    --danger-wash:#F7ECE9;
+    --line:#DDD8D0;
+    /* Legacy variable names kept so every existing rule below still resolves — aliased onto
+       the palette above rather than rewritten one-by-one across the file. */
+    --bg:var(--cream);
+    --card:var(--paper);
+    --olive:var(--navy);
+    --olive-deep:var(--navy-deep);
+    --olive-tint:var(--teal-wash);
+    --terracotta:var(--champ);
+    --terracotta-tint:var(--champ-wash);
+    --gold:var(--champ-2);
+    --gold-tint:var(--champ-wash);
+    --text:var(--ink);
+    --text-muted:var(--ink3);
+    --border:var(--line);
+    --catalyst-red:#C24A3B;
+    --catalyst-red-tint:#FBEAE7;
+    --catalyst-red-border:#E3B0A6;
+    --motion-yellow:#B8892B;
+    --motion-yellow-tint:#FDF6E1;
+    --motion-yellow-border:#E8CE87;
+    --rhythm-green:#5C7A4A;
+    --rhythm-green-tint:#EDF3E7;
+    --rhythm-green-border:#C1D6AF;
+    --quarter-block:#3A4238;
+    --font-serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+    --font-sans:'Jost',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);font-weight:300;letter-spacing:.01em;padding:0 0 64px;-webkit-font-smoothing:antialiased;}
+  em{font-style:italic;}
+
+  @keyframes fadeInUp{
+    from{opacity:0;transform:translateY(8px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  .lock-screen{
+    position:fixed;inset:0;background:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    z-index:999;transition:opacity 250ms ease;padding:20px;
+  }
+  .lock-screen.fade-out{opacity:0;}
+  .lock-card{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;
+    padding:48px 40px;max-width:380px;width:100%;text-align:center;
+    box-shadow:0 1px 2px rgba(45,45,45,.03), 0 20px 44px rgba(45,45,45,.07);
+    animation:fadeInUp 400ms ease both;
+  }
+  .lock-wordmark{font-family:var(--font-serif);font-size:28px;color:var(--text);margin-bottom:6px;}
+  .lock-wordmark em{color:#C9A87C;font-weight:400;}
+  .lock-eyebrow{font-family:var(--font-sans);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:24px;}
+  .lock-rule{height:1px;background:var(--border);width:48px;margin:0 auto 28px;}
+  .lock-form input[type=password]{
+    width:100%;text-align:center;font-family:var(--font-sans);font-size:14px;
+    padding:13px 18px;border:1px solid var(--border);border-radius:999px;
+    background:var(--card);color:var(--text);outline:none;letter-spacing:3px;
+    transition:border-color 200ms ease;
+  }
+  .lock-form input[type=password]:focus{border-color:var(--olive);}
+  .lock-form .btn-pill{width:100%;justify-content:center;margin-top:14px;}
+  .lock-error{display:none;color:var(--danger);font-family:var(--font-sans);font-size:12.5px;margin-top:14px;}
+  .lock-signout{font-family:var(--font-sans);font-size:11.5px;color:var(--text-muted);text-align:center;margin-top:36px;}
+  .lock-signout a{color:var(--text-muted);text-decoration:underline;cursor:pointer;}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:56px 32px 10px;}
+  .header{text-align:center;margin-bottom:8px;animation:fadeInUp 400ms ease both;}
+  .tier-label{font-family:var(--font-sans);font-size:11px;letter-spacing:3px;color:var(--text-muted);text-transform:uppercase;margin-bottom:18px;font-weight:500;}
+  .wordmark{font-family:var(--font-serif);font-size:46px;font-weight:500;color:var(--text);line-height:1;letter-spacing:.2px;}
+  .wordmark em{color:#C9A87C;font-weight:400;}
+  .plan-subtitle{font-family:var(--font-serif);font-size:17px;color:var(--text-muted);margin-top:10px;letter-spacing:.3px;}
+  .plan-subtitle em{color:var(--olive);}
+  .rule{height:1px;background:var(--border);width:64px;margin:28px auto 0;}
+
+  .main-tab-nav{display:flex;gap:12px;justify-content:center;margin:32px 0 44px;flex-wrap:wrap;animation:fadeInUp 450ms ease 40ms both;}
+  .main-tab-btn{font-family:var(--font-sans);font-size:13.5px;font-weight:600;letter-spacing:.4px;padding:13px 28px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--text-muted);cursor:pointer;transition:all .2s ease;}
+  .main-tab-btn:hover{border-color:var(--terracotta);color:var(--terracotta);}
+  .main-tab-btn.active{background:var(--terracotta);border-color:var(--terracotta);color:var(--navy);}
+  .main-tab-panel{display:none;}
+  .main-tab-panel.active{display:block;animation:fadeInUp 350ms ease both;}
+
+  .vision-block{text-align:center;max-width:680px;margin:44px auto 52px;animation:fadeInUp 450ms ease 60ms both;}
+  .vision-label{font-family:var(--font-sans);font-size:12px;color:var(--text-muted);margin-bottom:14px;letter-spacing:.5px;}
+  .vision-quote{font-family:var(--font-serif);font-size:26px;line-height:1.6;font-style:italic;color:var(--text);font-weight:400;}
+  .vision-quote .mark{font-size:32px;color:var(--gold);vertical-align:-4px;font-style:normal;}
+  .vision-philosophy{font-family:var(--font-sans);font-size:13.5px;color:var(--text-muted);letter-spacing:.2px;margin-top:20px;font-style:italic;}
+  .vision-rule{height:1px;background:var(--border);width:64px;margin:26px auto 0;}
+
+  .progress-row{max-width:420px;margin:0 auto 52px;animation:fadeInUp 450ms ease 100ms both;}
+  .progress-label{text-align:center;font-family:var(--font-sans);font-size:12px;color:var(--text-muted);margin-bottom:8px;letter-spacing:.2px;}
+  .progress-bar{height:3px;background:var(--border);border-radius:4px;overflow:hidden;}
+  .progress-fill{height:100%;background:var(--teal);width:0%;transition:width 300ms ease;}
+
+  .purpose{border:1px solid var(--border);background:var(--card);border-radius:16px;padding:24px 30px;font-family:var(--font-serif);font-style:italic;font-size:17px;line-height:1.65;color:var(--text-muted);margin-bottom:40px;box-shadow:0 1px 2px rgba(45,45,45,.03), 0 12px 28px rgba(45,45,45,.04);animation:fadeInUp 450ms ease 140ms both;}
+
+  section.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    margin-bottom:28px;
+    padding:34px 38px 30px;
+    box-shadow:0 1px 2px rgba(45,45,45,.03), 0 16px 32px rgba(45,45,45,.04);
+    animation:fadeInUp 450ms ease both;
+  }
+  section.card.accent-olive{background:var(--olive-tint);border-color:#D9DFD3;}
+  section.card.accent-gold{background:var(--gold-tint);border-color:#E7D6B8;}
+
+  .eyebrow{font-family:var(--font-sans);font-size:12px;color:var(--text-muted);letter-spacing:.3px;margin-bottom:6px;font-weight:500;}
+  section.card h2{
+    font-family:var(--font-serif);
+    font-size:28px;
+    font-weight:500;
+    color:var(--text);
+    margin:0 0 10px;
+    letter-spacing:.2px;
+  }
+  section.card h2 em{color:var(--olive);font-weight:400;}
+  section.card.accent-olive h2 em, section.card.accent-gold h2 em{color:var(--terracotta);}
+
+  .concept-def{font-family:var(--font-sans);font-size:13.5px;color:var(--text-muted);line-height:1.6;margin:0 0 22px;max-width:640px;}
+
+  .outcome{font-family:var(--font-serif);font-style:italic;font-size:18px;color:var(--text);margin-bottom:16px;line-height:1.55;}
+  .sub-label{font-family:var(--font-sans);font-size:11.5px;letter-spacing:.4px;color:var(--text-muted);font-weight:500;margin:18px 0 10px;}
+
+  ul.items{list-style:none;margin:0;padding:0;}
+  .item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+  .item:last-child{border-bottom:none;}
+  .item .txt{flex:1;font-family:var(--font-sans);font-size:14.5px;line-height:1.6;outline:none;padding:2px 3px;border-radius:4px;transition:background 200ms ease;color:var(--text);}
+  .item .txt:focus{background:var(--card);}
+  .item.checked .txt{color:var(--text-muted);text-decoration:line-through;text-decoration-color:var(--border);}
+  .item .del{background:none;border:none;color:var(--text-muted);cursor:pointer;padding:3px;flex-shrink:0;display:flex;align-items:center;border-radius:6px;transition:all 200ms ease;opacity:.55;}
+  .item .del:hover{opacity:1;color:var(--danger);background:var(--danger-wash);}
+
+  input[type=checkbox]{
+    appearance:none;-webkit-appearance:none;
+    width:18px;height:18px;min-width:18px;
+    border:1.5px solid #C9C0AE;
+    border-radius:5px;background:var(--card);
+    cursor:pointer;position:relative;
+    margin-top:2px;flex-shrink:0;
+    transition:all 200ms ease;
+  }
+  input[type=checkbox]:hover{border-color:var(--teal);}
+  input[type=checkbox]:checked{background:var(--teal);border-color:var(--teal);}
+  input[type=checkbox]:checked::after{
+    content:'';position:absolute;left:5px;top:1px;
+    width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;
+    transform:rotate(45deg);
+  }
+  section.card.accent-olive input[type=checkbox]:checked,
+  section.card.accent-gold input[type=checkbox]:checked{background:var(--terracotta);border-color:var(--terracotta);}
+
+  .value-item{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--border);}
+  .value-item:last-child{border-bottom:none;}
+  .value-item .vtext{flex:1;}
+  .value-name{font-family:var(--font-serif);font-weight:600;font-size:18px;color:var(--text);outline:none;padding:1px 3px;border-radius:4px;transition:background 200ms ease;}
+  .value-desc{font-family:var(--font-sans);font-size:13.5px;color:var(--text-muted);outline:none;padding:1px 3px;margin-top:4px;line-height:1.55;border-radius:4px;transition:background 200ms ease;}
+  .value-name:focus, .value-desc:focus{background:var(--card);}
+
+  .glossary-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:0 40px;}
+  .glossary-item{display:flex;align-items:flex-start;gap:12px;padding:22px 0;border-bottom:1px solid var(--border);}
+  .glossary-item .gtext{flex:1;}
+  .term-name{font-family:var(--font-serif);font-style:italic;font-weight:600;font-size:21px;color:var(--text);outline:none;padding:1px 3px;border-radius:4px;transition:background 200ms ease;margin-bottom:6px;letter-spacing:.2px;}
+  .term-desc{font-family:var(--font-sans);font-size:14px;line-height:1.75;color:var(--text-muted);outline:none;padding:1px 3px;border-radius:4px;transition:background 200ms ease;}
+  .term-name:focus, .term-desc:focus{background:var(--card);}
+
+  .add-row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;}
+  .add-row input{
+    flex:1;min-width:160px;font-family:var(--font-sans);font-size:13.5px;
+    padding:11px 16px;border:1px solid var(--border);
+    border-radius:999px;background:var(--card);color:var(--text);
+    outline:none;transition:border-color 200ms ease;
+  }
+  .add-row input:focus{border-color:var(--olive);}
+  .btn-pill{
+    font-family:var(--font-sans);font-size:13px;font-weight:500;
+    letter-spacing:.2px;
+    background:var(--navy);color:var(--champ);
+    border:1px solid var(--navy);
+    border-radius:999px;
+    padding:11px 22px;
+    cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;
+    transition:all 200ms ease;
+    white-space:nowrap;
+  }
+  .btn-pill:hover{background:var(--champ);border-color:var(--champ);color:var(--navy);}
+  .btn-pill.ghost{background:var(--card);color:var(--navy);}
+  .btn-pill svg{flex-shrink:0;}
+
+  .board-wrap{overflow-x:auto;padding-bottom:6px;margin-top:6px;}
+  .board{display:grid;grid-template-columns:76px repeat(3,1fr);gap:10px;min-width:700px;}
+  .board-headcell{
+    font-family:var(--font-sans);font-size:11px;letter-spacing:1px;text-transform:uppercase;
+    color:var(--text-muted);text-align:center;padding:11px 6px;font-weight:700;
+    border:1.5px solid var(--border);border-radius:9px;background:var(--card);
+  }
+  .board-headcell.catalyst{color:var(--catalyst-red);background:var(--catalyst-red-tint);border-color:var(--catalyst-red-border);}
+  .board-headcell.process{color:var(--motion-yellow);background:var(--motion-yellow-tint);border-color:var(--motion-yellow-border);}
+  .board-headcell.system{color:var(--rhythm-green);background:var(--rhythm-green-tint);border-color:var(--rhythm-green-border);}
+  .board-qlabel{
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-serif);font-size:16px;font-style:italic;font-weight:500;
+    color:var(--text-muted);border:1px solid var(--border);
+    background:#F1EEE7;border-radius:10px;
+  }
+  .board-qlabel.current{box-shadow:0 0 0 2px var(--gold) inset;background:#FBF7EF;color:var(--text);}
+  .cell{
+    border:1px solid var(--border);border-radius:10px;min-height:88px;
+    padding:8px;display:flex;flex-direction:column;gap:8px;background:var(--card);
+    transition:background 200ms ease;
+  }
+  .cell[data-stage="rock"]{background:var(--catalyst-red-tint);border-color:var(--catalyst-red-border);}
+  .cell[data-stage="process"]{background:var(--motion-yellow-tint);border-color:var(--motion-yellow-border);}
+  .cell[data-stage="system"]{background:var(--rhythm-green-tint);border-color:var(--rhythm-green-border);}
+  .cell.current-q{box-shadow:0 0 0 2px var(--gold) inset;}
+  .cell.dragover{background:var(--olive-tint);}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:10px;
+    padding:9px 10px;font-family:var(--font-sans);font-size:12.5px;line-height:1.45;
+    cursor:grab;transition:box-shadow 200ms ease, background-color 300ms ease, border-color 300ms ease;
+  }
+  .card:hover{box-shadow:0 4px 12px rgba(45,45,45,.06);}
+  .card.catalyst{background:rgba(194,74,59,.07);border-color:rgba(194,74,59,.28);border-left:3px solid var(--catalyst-red);}
+  .card.process{background:rgba(184,137,43,.09);border-color:rgba(184,137,43,.28);border-left:3px solid var(--motion-yellow);}
+  .card.system{background:rgba(92,122,74,.09);border-color:rgba(92,122,74,.28);border-left:3px solid var(--rhythm-green);}
+  .card-top{display:flex;align-items:flex-start;gap:8px;}
+  .card .card-txt{outline:none;flex:1;border-radius:4px;padding:1px 2px;transition:background 200ms ease;}
+  .card .card-txt:focus{background:var(--card);}
+  .card.done{opacity:.6;}
+  .card.done .card-txt{color:var(--text-muted);text-decoration:line-through;}
+  .card-controls{display:flex;justify-content:flex-end;gap:2px;margin-top:4px;}
+  .card .adv,.card .delc{
+    font-family:var(--font-sans);background:none;border:none;font-size:10.5px;
+    cursor:pointer;color:var(--text-muted);padding:3px 6px;border-radius:6px;
+    display:inline-flex;align-items:center;gap:3px;opacity:.7;transition:all 200ms ease;
+  }
+  .card .adv:hover{opacity:1;color:var(--olive);background:var(--olive-tint);}
+  .card .delc:hover{opacity:1;color:var(--danger);background:var(--danger-wash);}
+  .cell-add input{
+    width:100%;font-family:var(--font-sans);font-size:11px;
+    padding:6px 9px;border:1px dashed #D6CDBB;border-radius:8px;
+    background:transparent;outline:none;transition:border-color 200ms ease;
+  }
+  .cell-add input:focus{border-color:var(--olive);border-style:solid;}
+  .board-legend{font-family:var(--font-sans);font-size:12px;color:var(--text-muted);margin-top:16px;line-height:1.6;}
+
+  .outcomes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));gap:28px;}
+  .outcomes-grid section.card{margin-bottom:0;}
+
+  .roadmap-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;gap:0;margin-top:6px;}
+  .roadmap-col{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;}
+  .roadmap-col.horizon-5{background:var(--olive-tint);border-color:#D9DFD3;}
+  .roadmap-col.horizon-10{background:var(--gold-tint);border-color:#E7D6B8;}
+  .roadmap-sub{font-family:var(--font-serif);font-style:italic;font-size:19px;color:var(--text);margin-bottom:4px;}
+  .roadmap-tag{font-family:var(--font-sans);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;font-weight:600;}
+  .roadmap-col .items{flex:1;}
+  .roadmap-col .add-row{margin-top:14px;}
+  .roadmap-col .add-row input{font-size:12.5px;padding:9px 14px;}
+  .roadmap-col .add-row .btn-pill{padding:9px 16px;font-size:12px;}
+  .roadmap-arrow{display:flex;align-items:center;justify-content:center;padding:0 14px;color:var(--gold);font-size:20px;}
+
+  @media (max-width:900px){
+    .roadmap-row{grid-template-columns:1fr;gap:16px;}
+    .roadmap-arrow{transform:rotate(90deg);padding:2px 0;}
+  }
+
+  .collapse-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;cursor:pointer;}
+  .collapse-header .concept-def{margin-bottom:0;}
+  .chevron-btn{background:none;border:none;cursor:pointer;color:var(--text-muted);padding:7px;border-radius:8px;transition:all 200ms ease;flex-shrink:0;margin-top:2px;}
+  .chevron-btn:hover{background:var(--olive-tint);color:var(--olive);}
+  .chevron-btn svg{display:block;transition:transform 250ms ease;}
+  .collapse-body{overflow:hidden;max-height:0;opacity:0;transition:max-height 300ms ease, opacity 250ms ease, margin-top 300ms ease;margin-top:0;}
+  .collapsible.expanded .collapse-body{max-height:3000px;opacity:1;margin-top:20px;}
+  .collapsible.expanded .chevron-btn svg{transform:rotate(180deg);}
+
+  .footer-signout{font-family:var(--font-sans);font-size:11.5px;color:var(--text-muted);text-align:center;margin-top:8px;}
+  .footer-signout a{color:var(--text-muted);cursor:pointer;text-decoration:underline;}
+  .footer-signature{font-family:var(--font-serif);font-style:italic;font-size:14px;color:var(--text-muted);text-align:center;margin-top:36px;padding-top:28px;border-top:1px solid var(--border);}
+  .footer-signature strong{font-style:normal;font-weight:500;color:var(--text);}
+
+  .section-intro{max-width:680px;margin:0 0 28px;animation:fadeInUp 450ms ease both;}
+  .section-intro h2{font-family:var(--font-serif);font-size:30px;font-weight:500;color:var(--text);margin:0 0 10px;}
+  .section-intro h2 em{color:var(--olive);font-weight:400;}
+  .section-intro .concept-def{margin-bottom:0;}
+
+  /* ---- Business Plan tab ---- */
+  .tab-nav{display:flex;gap:10px;justify-content:center;margin:0 0 36px;flex-wrap:wrap;animation:fadeInUp 450ms ease 80ms both;}
+  .tab-btn{font-family:var(--font-sans);font-size:13px;font-weight:600;letter-spacing:.3px;padding:11px 22px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--text-muted);cursor:pointer;transition:all .2s ease;}
+  .tab-btn:hover{border-color:var(--olive);color:var(--olive-deep);}
+  .tab-btn.active{background:var(--olive);border-color:var(--olive);color:var(--champ);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;animation:fadeInUp 350ms ease both;}
+
+  .plan-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .plan-subcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 24px;}
+  .plan-subcard.listings{border-left:4px solid var(--terracotta);}
+  .plan-subcard.buyers{border-left:4px solid var(--gold);}
+  .plan-subcard h3{font-family:var(--font-serif);font-style:italic;font-size:19px;margin:0 0 16px;color:var(--text);}
+  .plan-field{margin-bottom:14px;}
+  .plan-field label{display:block;font-family:var(--font-sans);font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--text-muted);font-weight:600;margin-bottom:6px;}
+  .plan-field .input-wrap{display:flex;align-items:center;gap:6px;}
+  .plan-field input{width:100%;font-family:var(--font-sans);font-size:14.5px;padding:9px 13px;border:1px solid var(--border);border-radius:9px;background:var(--card);color:var(--text);outline:none;transition:border-color .2s;}
+  .plan-field input:focus{border-color:var(--olive);}
+  .plan-calc-row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-top:1px dashed var(--border);margin-top:4px;}
+  .plan-calc-row .lbl{font-family:var(--font-sans);font-size:12px;color:var(--text-muted);}
+  .plan-calc-row .val{font-family:var(--font-serif);font-style:italic;font-size:17px;color:var(--olive-deep);}
+
+  .goal-row{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end;margin-bottom:26px;}
+  .goal-field label{display:block;font-family:var(--font-sans);font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--text-muted);font-weight:600;margin-bottom:6px;}
+  .goal-field input{font-family:var(--font-serif);font-size:20px;font-style:italic;padding:10px 16px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--olive-deep);outline:none;width:160px;transition:border-color .2s;}
+  .goal-field input:focus{border-color:var(--olive);}
+  .goal-field.pct input{width:90px;}
+
+  .stat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-top:24px;}
+  .stat-box{background:var(--olive-tint);border:1px solid #D9DFD3;border-radius:12px;padding:18px 16px;text-align:center;}
+  .stat-box.gold{background:var(--gold-tint);border-color:#E7D6B8;}
+  .stat-box .num{font-family:var(--font-serif);font-size:24px;color:var(--olive-deep);font-style:italic;}
+  .stat-box.gold .num{color:var(--terracotta);}
+  .stat-box .lbl{font-family:var(--font-sans);font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--text-muted);margin-top:5px;font-weight:600;}
+
+  .meta-row{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:22px;}
+  .meta-field label{display:block;font-family:var(--font-sans);font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--text-muted);font-weight:600;margin-bottom:6px;}
+  .meta-field input{font-family:var(--font-sans);font-size:14px;padding:9px 13px;border:1px solid var(--border);border-radius:9px;background:var(--card);color:var(--text);outline:none;width:110px;}
+
+  table.activity-table{width:100%;border-collapse:collapse;font-family:var(--font-sans);font-size:13.5px;}
+  table.activity-table th{text-align:left;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--text-muted);font-weight:600;padding:0 8px 10px;border-bottom:1px solid var(--border);}
+  table.activity-table td{padding:10px 8px;border-bottom:1px solid var(--border);vertical-align:middle;}
+  table.activity-table .act-name{outline:none;border-radius:4px;padding:2px 4px;min-width:180px;}
+  table.activity-table .act-name:focus{background:var(--card);}
+  table.activity-table input.pct-input{width:64px;font-family:var(--font-sans);font-size:13px;padding:7px 9px;border:1px solid var(--border);border-radius:8px;background:var(--card);outline:none;text-align:right;}
+  table.activity-table input.pct-input:focus{border-color:var(--olive);}
+  table.activity-table .computed{color:var(--text-muted);font-style:italic;font-family:var(--font-serif);font-size:14.5px;}
+  table.activity-table tr.total-row td{font-weight:700;background:var(--olive-tint);border-radius:8px;}
+  .act-del{background:none;border:none;color:var(--text-muted);cursor:pointer;opacity:.55;padding:4px;border-radius:6px;transition:all .2s;}
+  .act-del:hover{opacity:1;color:var(--danger);background:var(--danger-wash);}
+
+  .table-wrap{overflow-x:auto;padding-bottom:4px;}
+
+  table.sales-table{width:100%;border-collapse:collapse;font-family:var(--font-sans);font-size:13px;min-width:820px;}
+  table.sales-table th{text-align:left;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--text-muted);font-weight:600;padding:0 8px 10px;border-bottom:1px solid var(--border);}
+  table.sales-table td{padding:6px 6px;border-bottom:1px solid var(--border);}
+  table.sales-table input, table.sales-table select{width:100%;font-family:var(--font-sans);font-size:13px;padding:8px 9px;border:1px solid var(--border);border-radius:8px;background:var(--card);outline:none;}
+  table.sales-table input:focus, table.sales-table select:focus{border-color:var(--olive);}
+  table.sales-table tr.total-row td{font-weight:700;background:var(--gold-tint);}
+
+  table.pnl-table{width:100%;border-collapse:collapse;font-family:var(--font-sans);font-size:11.5px;min-width:1500px;}
+  table.pnl-table th{background:var(--olive-tint);color:var(--text);font-weight:600;padding:8px 5px;text-align:center;border:1px solid var(--border);font-size:10.5px;letter-spacing:.3px;}
+  table.pnl-table td{padding:2px;border:1px solid var(--border);text-align:center;}
+  table.pnl-table td.cat{text-align:left;padding-left:10px;min-width:190px;}
+  table.pnl-table .pnl-cat-name{outline:none;border-radius:4px;padding:3px 5px;font-weight:500;}
+  table.pnl-table .pnl-cat-name:focus{background:var(--card);}
+  table.pnl-table input.month-input{width:64px;text-align:right;border:none;background:transparent;font-family:var(--font-sans);font-size:11.5px;padding:8px 4px;outline:none;}
+  table.pnl-table input.month-input:focus{background:var(--card);box-shadow:0 0 0 1px var(--olive) inset;border-radius:4px;}
+  table.pnl-table .yearly{font-weight:600;color:var(--olive-deep);background:var(--olive-tint);}
+  table.pnl-table tr.section-row td{font-family:var(--font-serif);font-style:italic;font-size:13px;background:var(--gold-tint);text-align:left;padding-left:10px;color:var(--terracotta);}
+  table.pnl-table tr.total-row td{font-weight:700;background:var(--olive-tint);}
+  table.pnl-table tr.profit-row td{font-weight:700;background:var(--terracotta-tint);}
+  .pnl-del{background:none;border:none;color:var(--text-muted);cursor:pointer;opacity:.5;padding:3px;}
+  .pnl-del:hover{opacity:1;color:var(--danger);}
+
+  @media (max-width:720px){
+    .wrap{padding:36px 18px 10px;}
+    .wordmark{font-size:34px;}
+    .vision-quote{font-size:21px;}
+    section.card{padding:26px 22px 22px;}
+    .outcomes-grid{grid-template-columns:1fr;}
+    .plan-grid-2{grid-template-columns:1fr;}
+  }
+
+  @media print{
+    @page{size:landscape;margin:14mm;}
+    body{padding-bottom:0;background:#fff;}
+    .lock-screen{display:none !important;}
+    #app-content{display:block !important;}
+    .footer-signout{display:none;}
+    .add-row{display:none;}
+    .cell-add{display:none;}
+    section.card{box-shadow:none;break-inside:avoid;}
+    .collapse-body{max-height:none !important;opacity:1 !important;overflow:visible !important;margin-top:20px !important;}
+    .board-wrap{overflow:visible;}
+    .board{min-width:0;width:100%;grid-template-columns:44px repeat(3,1fr);gap:4px;}
+    .board-headcell{font-size:9px;}
+    .board-qlabel{font-size:12px;}
+    .card{font-size:9.5px;padding:6px 6px;}
+    .card .adv,.card .delc{display:none;}
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+</head>
+<body>
+
+<div class="lock-screen" id="lock-screen">
+  <div class="lock-card">
+    <div class="lock-wordmark">The <em>58</em> Group</div>
+    <div class="lock-eyebrow">Private Workspace</div>
+    <div class="lock-rule"></div>
+    <form class="lock-form" id="lock-form">
+      <input type="password" id="lock-password" placeholder="Password" autocomplete="off" autofocus>
+      <button type="submit" class="btn-pill">Enter</button>
+      <div class="lock-error" id="lock-error">That password isn't right — try again.</div>
+    </form>
+  </div>
+</div>
+
+<div class="wrap" id="app-content" style="display:none;">
+  <div class="header">
+    <div class="tier-label">Jeannette Peña</div>
+    <div class="wordmark">The <em>58</em> Group</div>
+    <div class="plan-subtitle">Working Plan — <em>2026</em></div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="main-tab-nav">
+    <button class="main-tab-btn active" data-maintab="workingplan">Working Plan</button>
+    <button class="main-tab-btn" data-maintab="businessplan">Business Plan 2026</button>
+  </div>
+
+  <div class="main-tab-panel active" id="maintab-workingplan">
+
+  <div class="vision-block">
+    <div class="vision-label">The Life I'm Building</div>
+    <div class="vision-quote"><span class="mark">“</span>Build a business that gives me the freedom to live between Spain and the U.S., earning in dollars, spending in euros, traveling the world with my children, and choosing when, where, and with whom I work.<span class="mark">”</span></div>
+    <div class="vision-philosophy">A meaningful business should create the life you want — not consume it.</div>
+    <div class="vision-rule"></div>
+  </div>
+
+  <div class="progress-row">
+    <div class="progress-label" id="progressLabel">0 of 0 complete</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="purpose">This is a living framework, not a finished plan. It grows in small, intentional steps — reviewed often, revised as life and business evolve. Mark what's complete, refine any line, add what's calling for space, release what no longer serves the life you're building.</div>
+
+  <section class="card values">
+    <div class="eyebrow">What I Build From</div>
+    <h2><em>Foundations</em></h2>
+    <div class="concept-def">These are the principles that support every decision you make and every business you build.</div>
+    <div id="values-list"></div>
+    <div class="add-row">
+      <input type="text" placeholder="Foundation name…" id="value-name-input" style="max-width:200px;">
+      <input type="text" placeholder="What it means…" id="value-desc-input">
+      <button class="btn-pill" id="add-value-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button>
+    </div>
+  </section>
+
+  <section class="card glossary collapsible" id="glossary-section">
+    <div class="collapse-header" id="glossary-header">
+      <div>
+        <div class="eyebrow">How I Name Things</div>
+        <h2>The <em>Language</em></h2>
+        <div class="concept-def">A framework is only as strong as the words that hold it together. These are not productivity terms — they are the vocabulary of a philosophy for building a business that gives you back your life. Learn them once, and you won't see your work the same way again.</div>
+      </div>
+      <button class="chevron-btn" id="glossary-toggle" type="button" aria-label="Show the language">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </div>
+    <div class="collapse-body" id="glossary-body">
+      <div class="glossary-list" id="glossary-list"></div>
+      <div class="add-row">
+        <input type="text" placeholder="Term…" id="glossary-name-input" style="max-width:200px;">
+        <input type="text" placeholder="What it means…" id="glossary-desc-input">
+        <button class="btn-pill" id="add-glossary-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="eyebrow">The Long View</div>
+    <h2>The <em>Roadmap</em></h2>
+    <div class="concept-def">Your main goal — where this business is headed. Everything in Focus Areas below is this year's step toward it; every Catalyst this quarter is what makes that step real.</div>
+    <div class="roadmap-row">
+      <div class="roadmap-col horizon-5">
+        <div class="roadmap-tag">Horizon</div>
+        <div class="roadmap-sub">5 Years</div>
+        <ul class="items" data-section="roadmap5"></ul>
+        <div class="add-row"><input type="text" placeholder="Add a 5-year goal…" data-target="roadmap5"><button class="btn-pill" data-add="roadmap5"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button></div>
+      </div>
+      <div class="roadmap-arrow">→</div>
+      <div class="roadmap-col horizon-10">
+        <div class="roadmap-tag">Horizon</div>
+        <div class="roadmap-sub">10 Years</div>
+        <ul class="items" data-section="roadmap10"></ul>
+        <div class="add-row"><input type="text" placeholder="Add a 10-year goal…" data-target="roadmap10"><button class="btn-pill" data-add="roadmap10"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-intro">
+    <div class="eyebrow">This Year — The 1-Year Plan</div>
+    <h2>Focus <em>Areas</em></h2>
+    <div class="concept-def">The most important areas of your life and business receiving intentional attention this year — the near-term work that builds toward the 5 &amp; 10-year roadmap above.</div>
+  </div>
+
+  <div class="outcomes-grid">
+
+    <section class="card">
+      <div class="eyebrow">Focus Area</div>
+      <h2>Real Estate <em>Production</em></h2>
+      <div class="outcome">Build a predictable and profitable real estate business with consistent monthly production.</div>
+      <div class="sub-label">Signs of progress</div>
+      <ul class="items" data-section="outcome1"></ul>
+      <div class="add-row"><input type="text" placeholder="Add a sign of progress…" data-target="outcome1"><button class="btn-pill" data-add="outcome1"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button></div>
+    </section>
+
+    <section class="card">
+      <div class="eyebrow">Focus Area</div>
+      <h2>Brokerage &amp; <em>Global Leadership</em></h2>
+      <div class="outcome">Successfully transition to Jane Byrd and build a visible leadership role in the Global Division while creating recurring coaching and broker income in Spanish.</div>
+      <div class="sub-label">Signs of progress</div>
+      <ul class="items" data-section="outcome2"></ul>
+      <div class="add-row"><input type="text" placeholder="Add a sign of progress…" data-target="outcome2"><button class="btn-pill" data-add="outcome2"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button></div>
+    </section>
+
+    <section class="card">
+      <div class="eyebrow">Focus Area</div>
+      <h2>Brand &amp; <em>Content</em></h2>
+      <div class="outcome">Build a consistent, recognizable content system that positions Jeannette Peña as a trusted cross-border real estate voice between Texas and Mexico.</div>
+      <div class="sub-label">Signs of progress</div>
+      <ul class="items" data-section="outcome3"></ul>
+      <div class="add-row"><input type="text" placeholder="Add a sign of progress…" data-target="outcome3"><button class="btn-pill" data-add="outcome3"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button></div>
+    </section>
+
+    <section class="card">
+      <div class="eyebrow">Focus Area</div>
+      <h2>Client <em>Relationships</em></h2>
+      <div class="outcome">Reconnect with past clients and strengthen the referral base through consistent personal communication.</div>
+      <div class="sub-label">Signs of progress</div>
+      <ul class="items" data-section="outcome5"></ul>
+      <div class="add-row"><input type="text" placeholder="Add a sign of progress…" data-target="outcome5"><button class="btn-pill" data-add="outcome5"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button></div>
+    </section>
+
+    <section class="card">
+      <div class="eyebrow">Focus Area</div>
+      <h2>The 58 <em>Operating System</em></h2>
+      <div class="outcome">Build a business that is increasingly organized, delegated, AI-assisted, and less dependent on Jeannette doing everything herself.</div>
+      <div class="sub-label">Signs of progress</div>
+      <ul class="items" data-section="outcome6"></ul>
+      <div class="add-row"><input type="text" placeholder="Add a sign of progress…" data-target="outcome6"><button class="btn-pill" data-add="outcome6"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button></div>
+    </section>
+
+    <section class="card">
+      <div class="eyebrow">Focus Area</div>
+      <h2>Personal Capacity &amp; <em>Freedom</em></h2>
+      <div class="outcome">Protect health, family, energy, and personal freedom while building a profitable business.</div>
+      <div class="sub-label">Signs of progress</div>
+      <ul class="items" data-section="outcome7"></ul>
+      <div class="add-row"><input type="text" placeholder="Add a sign of progress…" data-target="outcome7"><button class="btn-pill" data-add="outcome7"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button></div>
+    </section>
+
+  </div>
+
+  <section class="card" style="margin-top:28px;">
+    <div class="eyebrow">Already Working</div>
+    <h2><em>Momentum</em></h2>
+    <div class="concept-def">Proof the philosophy is already working, before anything new gets added on top of it.</div>
+    <ul class="items" data-section="working"></ul>
+    <div class="add-row"><input type="text" placeholder="Add a line…" data-target="working"><button class="btn-pill" data-add="working"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button></div>
+  </section>
+
+  <section class="card">
+    <div class="eyebrow">Not Yet in Season</div>
+    <h2><em>Horizon</em></h2>
+    <div class="concept-def">Ideas worth protecting until the right season arrives.</div>
+    <ul class="items" data-section="ideas-list" id="ideas-list"></ul>
+    <div class="add-row"><input type="text" placeholder="Add something for the horizon…" id="idea-input"><button class="btn-pill" id="idea-add-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button></div>
+  </section>
+
+  <section class="card accent-olive">
+    <div class="eyebrow">The Next 7 Days</div>
+    <h2>Weekly <em>Focus</em></h2>
+    <div class="concept-def">The few commitments that deserve your attention this week. Check one off and it quietly clears itself two weeks later.</div>
+    <ul class="items" id="todo-list"></ul>
+    <div class="add-row"><input type="text" placeholder="Add a commitment for this week…" id="todo-input"><button class="btn-pill" id="todo-add-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add</button></div>
+  </section>
+
+  <section class="card">
+    <div class="eyebrow">This Season</div>
+    <h2>Quarterly <em>Catalysts</em></h2>
+    <div class="concept-def">The initiatives that will create the greatest positive change over the next quarter. When a Catalyst is complete, it graduates into Rhythm — a repeatable practice — which frees space for the next Catalyst. Drag any card between columns or quarters, or use the arrow to advance it.</div>
+    <div class="board-wrap">
+      <div class="board" id="global-board"></div>
+    </div>
+    <div class="board-legend">Red = Catalyst, in motion. Yellow = Motion, moving forward. Green = Rhythm, repeatable practice. The current season is outlined in gold. Add a catalyst directly into any quarter using the small field at the bottom of that box.</div>
+  </section>
+
+  </div>
+  <!-- /maintab-workingplan -->
+
+  <div class="main-tab-panel" id="maintab-businessplan">
+
+  <div class="section-intro">
+    <div class="eyebrow">Planning For Production</div>
+    <h2>Business <em>Plan</em> — 2026</h2>
+    <div class="concept-def">Adapted from the REALTOR® Business Planner — personalized to your goals, channels, and 2026 numbers. Every field is editable; every list can grow or shrink.</div>
+  </div>
+
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="income">Income Goals</button>
+    <button class="tab-btn" data-tab="activity">Activity Plan</button>
+    <button class="tab-btn" data-tab="sales">Sales Tracker</button>
+    <button class="tab-btn" data-tab="pnl">Profit &amp; Loss</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-income">
+    <section class="card">
+      <div class="eyebrow">The Target</div>
+      <h2>Income <em>Goals</em></h2>
+      <div class="concept-def">Start with the number that matters — your annual GCI goal — then split it between listings and buyer sales to see exactly how many transactions and how much volume that requires.</div>
+
+      <div class="goal-row">
+        <div class="goal-field">
+          <label>Annual GCI Goal</label>
+          <input type="number" id="in-gciGoal" step="1000">
+        </div>
+        <div class="goal-field pct">
+          <label>Listings %</label>
+          <input type="number" id="in-listingsPct" step="1">
+        </div>
+        <div class="goal-field pct">
+          <label>Buyer Sales %</label>
+          <input type="number" id="in-buyersPct" step="1">
+        </div>
+      </div>
+
+      <div class="plan-grid-2">
+        <div class="plan-subcard listings">
+          <h3>Listings</h3>
+          <div class="plan-field">
+            <label>Average Sale Price</label>
+            <div class="input-wrap"><input type="number" id="in-l-avgPrice" step="5000"></div>
+          </div>
+          <div class="plan-field">
+            <label>Average Commission %</label>
+            <div class="input-wrap"><input type="number" id="in-l-commPct" step="0.1"></div>
+          </div>
+          <div class="plan-field">
+            <label>Agent's Split of Commission %</label>
+            <div class="input-wrap"><input type="number" id="in-l-splitPct" step="1"></div>
+          </div>
+          <div class="plan-field">
+            <label>% That Actually Close</label>
+            <div class="input-wrap"><input type="number" id="in-l-closePct" step="1"></div>
+          </div>
+          <div class="plan-calc-row"><div class="lbl">GCI Share</div><div class="val" id="out-l-gci">—</div></div>
+          <div class="plan-calc-row"><div class="lbl">Avg Commission / Deal</div><div class="val" id="out-l-perdeal">—</div></div>
+          <div class="plan-calc-row"><div class="lbl">Agent's Net Commission</div><div class="val" id="out-l-net">—</div></div>
+          <div class="plan-calc-row"><div class="lbl">Units Needed (Closed)</div><div class="val" id="out-l-units">—</div></div>
+          <div class="plan-calc-row"><div class="lbl">Listings to Be Taken</div><div class="val" id="out-l-taken">—</div></div>
+        </div>
+        <div class="plan-subcard buyers">
+          <h3>Buyer Sales</h3>
+          <div class="plan-field">
+            <label>Average Sale Price</label>
+            <div class="input-wrap"><input type="number" id="in-b-avgPrice" step="5000"></div>
+          </div>
+          <div class="plan-field">
+            <label>Average Commission %</label>
+            <div class="input-wrap"><input type="number" id="in-b-commPct" step="0.1"></div>
+          </div>
+          <div class="plan-field">
+            <label>Agent's Split of Commission %</label>
+            <div class="input-wrap"><input type="number" id="in-b-splitPct" step="1"></div>
+          </div>
+          <div class="plan-field">
+            <label>% That Actually Close</label>
+            <div class="input-wrap"><input type="number" id="in-b-closePct" step="1"></div>
+          </div>
+          <div class="plan-calc-row"><div class="lbl">GCI Share</div><div class="val" id="out-b-gci">—</div></div>
+          <div class="plan-calc-row"><div class="lbl">Avg Commission / Deal</div><div class="val" id="out-b-perdeal">—</div></div>
+          <div class="plan-calc-row"><div class="lbl">Agent's Net Commission</div><div class="val" id="out-b-net">—</div></div>
+          <div class="plan-calc-row"><div class="lbl">Units Needed (Closed)</div><div class="val" id="out-b-units">—</div></div>
+          <div class="plan-calc-row"><div class="lbl">Buyer Sales to Be Taken</div><div class="val" id="out-b-taken">—</div></div>
+        </div>
+      </div>
+
+      <div class="stat-strip">
+        <div class="stat-box"><div class="num" id="out-total-units">—</div><div class="lbl">Total Units / Year</div></div>
+        <div class="stat-box"><div class="num" id="out-monthly-units">—</div><div class="lbl">Units / Month</div></div>
+        <div class="stat-box gold"><div class="num" id="out-total-volume">—</div><div class="lbl">Total Volume Needed</div></div>
+        <div class="stat-box gold"><div class="num" id="out-total-net">—</div><div class="lbl">Agent's Net Commission</div></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="tab-panel" id="tab-activity">
+    <section class="card">
+      <div class="eyebrow">Turning Goals Into Motion</div>
+      <h2>Activity <em>Plan</em></h2>
+      <div class="concept-def">The units above only happen through appointments — and appointments only happen through consistent touches. Set your ratios, then split your effort across the channels that are actually yours.</div>
+
+      <div class="meta-row">
+        <div class="meta-field"><label>Appointments Needed / Sale</label><input type="number" id="in-apptsPerSale" step="1"></div>
+        <div class="meta-field"><label>Touches Needed / Appointment</label><input type="number" id="in-touchesPerAppt" step="1"></div>
+      </div>
+
+      <div class="stat-strip" style="margin-bottom:26px;">
+        <div class="stat-box"><div class="num" id="out-appts-year">—</div><div class="lbl">Appointments / Year</div></div>
+        <div class="stat-box"><div class="num" id="out-appts-month">—</div><div class="lbl">Appointments / Month</div></div>
+        <div class="stat-box gold"><div class="num" id="out-touches-year">—</div><div class="lbl">Touches / Year</div></div>
+        <div class="stat-box gold"><div class="num" id="out-touches-week">—</div><div class="lbl">Touches / Week</div></div>
+      </div>
+
+      <div class="sub-label">Your Channels — % of Effort</div>
+      <table class="activity-table">
+        <thead><tr><th>Activity</th><th>% Effort</th><th>Touches / Year</th><th>Touches / Month</th><th>Touches / Week</th><th></th></tr></thead>
+        <tbody id="activity-tbody"></tbody>
+      </table>
+      <div class="add-row">
+        <input type="text" placeholder="Add a new channel or activity…" id="activity-input">
+        <button class="btn-pill" id="activity-add-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add Channel</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="tab-panel" id="tab-sales">
+    <section class="card">
+      <div class="eyebrow">Where You Stand</div>
+      <h2>Progress Toward <em>Goal</em></h2>
+      <div class="concept-def">Closed deals plus what's actively in your pipeline, measured against your GCI goal from Income Goals.</div>
+
+      <div class="stat-strip">
+        <div class="stat-box"><div class="num" id="out-prog-goal">—</div><div class="lbl">GCI Goal</div></div>
+        <div class="stat-box"><div class="num" id="out-prog-closed">—</div><div class="lbl">GCI Closed</div></div>
+        <div class="stat-box gold"><div class="num" id="out-prog-pipeline">—</div><div class="lbl">GCI In Pipeline</div></div>
+        <div class="stat-box gold"><div class="num" id="out-prog-gap">—</div><div class="lbl">Still Needed</div></div>
+      </div>
+      <div class="stat-strip" style="margin-top:14px;">
+        <div class="stat-box"><div class="num" id="out-prog-units-goal">—</div><div class="lbl">Units Needed / Year</div></div>
+        <div class="stat-box"><div class="num" id="out-prog-units-closed">—</div><div class="lbl">Units Closed</div></div>
+        <div class="stat-box gold"><div class="num" id="out-prog-units-pipeline">—</div><div class="lbl">Units In Pipeline</div></div>
+        <div class="stat-box gold"><div class="num" id="out-prog-units-gap">—</div><div class="lbl">Units Still Needed</div></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="eyebrow">Active &amp; Projected</div>
+      <h2><em>Pipeline</em></h2>
+      <div class="concept-def">Listings on the market and buyers you're actively working — not yet closed, but counted as a projection toward your goal.</div>
+      <div class="table-wrap">
+        <table class="sales-table">
+          <colgroup>
+            <col style="width:24%"><col style="width:10%"><col style="width:12%"><col style="width:12%"><col style="width:7%"><col style="width:13%"><col style="width:16%"><col style="width:4%">
+          </colgroup>
+          <thead><tr><th>Property / Client</th><th>Type</th><th>Status</th><th>Price</th><th>Comm. %</th><th>Commission ($)</th><th>Expected Close</th><th></th></tr></thead>
+          <tbody id="pipeline-tbody"></tbody>
+          <tfoot><tr class="total-row"><td colspan="5">Total Projected</td><td id="pipeline-total-comm">—</td><td colspan="2"></td></tr></tfoot>
+        </table>
+      </div>
+      <div class="add-row">
+        <button class="btn-pill ghost" id="pipeline-add-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add Pipeline Deal</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="eyebrow">The Real Numbers</div>
+      <h2>Closed <em>Sales</em></h2>
+      <div class="concept-def">Log every closed transaction as it happens.</div>
+
+      <div class="table-wrap">
+        <table class="sales-table">
+          <thead><tr><th>Date Closed</th><th>Property / Client</th><th>Sale Price</th><th>Commission %</th><th>Commission ($)</th><th>Source</th><th>Role</th><th></th></tr></thead>
+          <tbody id="sales-tbody"></tbody>
+          <tfoot><tr class="total-row"><td colspan="2">Total</td><td id="sales-total-price">—</td><td></td><td id="sales-total-comm">—</td><td colspan="2">% of GCI Goal</td><td id="sales-pct-goal">—</td></tr></tfoot>
+        </table>
+      </div>
+      <div class="add-row">
+        <button class="btn-pill" id="sales-add-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add Closed Sale</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="tab-panel" id="tab-pnl">
+    <section class="card">
+      <div class="eyebrow">Running the Business</div>
+      <h2>Profit &amp; <em>Loss</em></h2>
+      <div class="concept-def">Track income and expenses month by month. Add or remove any line — the yearly totals and net profit recalculate as you type.</div>
+
+      <div class="table-wrap">
+        <table class="pnl-table">
+          <thead>
+            <tr><th style="text-align:left;padding-left:10px;">Category</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Yearly</th></tr>
+          </thead>
+          <tbody>
+            <tr class="section-row"><td colspan="14">Income</td></tr>
+          </tbody>
+          <tbody id="pnl-income-tbody"></tbody>
+          <tbody>
+            <tr class="total-row" id="pnl-total-income-row"><td class="cat">Total Income</td></tr>
+          </tbody>
+          <tbody>
+            <tr class="section-row"><td colspan="14">Expenses</td></tr>
+          </tbody>
+          <tbody id="pnl-expense-tbody"></tbody>
+          <tbody>
+            <tr class="total-row" id="pnl-total-expense-row"><td class="cat">Total Expenses</td></tr>
+          </tbody>
+          <tbody>
+            <tr class="profit-row" id="pnl-profit-row"><td class="cat">Net Profit</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="add-row">
+        <input type="text" placeholder="Add an income line…" id="pnl-income-input">
+        <button class="btn-pill ghost" id="pnl-income-add-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add Income Line</button>
+        <input type="text" placeholder="Add an expense line…" id="pnl-expense-input">
+        <button class="btn-pill" id="pnl-expense-add-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Add Expense Line</button>
+      </div>
+    </section>
+  </div>
+
+  </div>
+  <!-- /maintab-businessplan -->
+
+  <div class="footer-signout">Not you? <a id="signout-link">Lock this workspace</a></div>
+  <div class="footer-signature">A <strong>Quantum58</strong> Framework — Created by Jeannette Peña</div>
+</div>
+
+<script>
+const LOCK_KEY = "o58_unlocked_v1";
+const SITE_PASSWORD = "5858";
+
+function showApp(){
+  document.getElementById("lock-screen").style.display = "none";
+  document.getElementById("app-content").style.display = "";
+  // Load fresh data from Supabase every time app is shown
+  setTimeout(function(){
+    if(typeof loadFromSupabase === 'function'){
+      loadFromSupabase().catch(e => console.warn('SB load error:', e));
+    }
+  }, 400);
+}
+function showLock(){
+  document.getElementById("lock-screen").style.display = "flex";
+  document.getElementById("lock-screen").classList.remove("fade-out");
+  document.getElementById("app-content").style.display = "none";
+}
+if(sessionStorage.getItem(LOCK_KEY) === "yes"){ showApp(); } else { showLock(); }
+
+document.getElementById("lock-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  const val = document.getElementById("lock-password").value;
+  const errEl = document.getElementById("lock-error");
+  if(val === SITE_PASSWORD){
+    sessionStorage.setItem(LOCK_KEY, "yes");
+    errEl.style.display = "none";
+    const lockEl = document.getElementById("lock-screen");
+    lockEl.classList.add("fade-out");
+    setTimeout(showApp, 250);
+  } else {
+    errEl.style.display = "block";
+    document.getElementById("lock-password").value = "";
+    document.getElementById("lock-password").focus();
+  }
+});
+
+document.getElementById("signout-link").addEventListener("click", function(){
+  sessionStorage.removeItem(LOCK_KEY);
+  showLock();
+  document.getElementById("lock-password").value = "";
+});
+
+document.getElementById("glossary-header").addEventListener("click", function(){
+  document.getElementById("glossary-section").classList.toggle("expanded");
+});
+
+/* ---- Top-level tab switching (Working Plan / Business Plan) ---- */
+document.querySelectorAll(".main-tab-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".main-tab-btn").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".main-tab-panel").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("maintab-"+btn.dataset.maintab).classList.add("active");
+  });
+});
+
+const ICON_X = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
+const ICON_ARROW = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+
+const DEFAULTS = {
+  working: [
+    "Monthly Latitude 58 newsletter sent consistently since March 2025.",
+    "Flodesk database cleaned and active email list organized.",
+    "The Note launched as a weekly Wednesday email.",
+    "Wednesday publishing rhythm established — first Wednesday of each month: Latitude 58; remaining Wednesdays: The Note."
+  ],
+  outcome1: [
+    "$350,000 GCI.",
+    "3–5 closed transactions per month.",
+    "Maintain approximately 10 active listings, adjusted as needed to support production.",
+    "Maintain an active buyer pipeline.",
+    "Maintain an active seller pipeline.",
+    "Maintain enough qualified opportunities to support the next 90 days of business.",
+    "Keep Cloze updated weekly.",
+    "Run a consistent past-client relationship system."
+  ],
+  outcome2: [
+    "Complete the brokerage transition.",
+    "Define role, compensation, and authority within the Global Division.",
+    "Launch at least one Spanish-language coaching offer for agents.",
+    "Create recurring monthly coaching income.",
+    "Create recurring broker or agent-development income.",
+    "Establish a clear agent recruitment and retention strategy."
+  ],
+  outcome3: [
+    "Publish Latitude 58 on the first Wednesday of every month.",
+    "Publish The Note on the remaining Wednesdays.",
+    "Publish two \"Uncomfortable Questions\" Instagram carousels per week.",
+    "Update and harmonize all Instagram accounts.",
+    "Maintain consistent bios, titles, colors, links, and visual identity across accounts.",
+    "Track engagement, replies, shares, saves, and conversations generated."
+  ],
+  outcome5: [
+    "Contact past clients consistently each week.",
+    "Use a mix of phone calls, personal texts, handwritten notes, and occasional letters.",
+    "Create a simple monthly past-client touch plan.",
+    "Track meaningful conversations and referrals generated.",
+    "Keep birthdays, anniversaries, moves, and important life updates current in Cloze.",
+    "Reach out with genuine care before asking for business."
+  ],
+  outcome6: [
+    "Maintain this document as the central working plan.",
+    "Define quarterly Catalysts and review them weekly.",
+    "Build a weekly CEO scorecard.",
+    "Document repeatable processes and SOPs.",
+    "Delegate clear content and operational responsibilities to Andrea.",
+    "Use Claude, ChatGPT, Google Drive, Cloze, Flodesk, and automations as one connected operating system.",
+    "Separate CEO work, delegated work, recurring standards, projects, and someday ideas."
+  ],
+  outcome7: [
+    "Maintain a sustainable weekly schedule.",
+    "Protect time for health, exercise, family, faith, rest, and travel.",
+    "Reduce work that does not require Jeannette's judgment, relationships, or voice.",
+    "Build systems that create more freedom rather than simply more activity."
+  ],
+  roadmap5: [
+    "Describe the business you want to have built five years from now."
+  ],
+  roadmap10: [
+    "Describe the life this business will have given you by then."
+  ]
+};
+
+const DEFAULT_VALUES = [
+  { name:"Relationships Before Transactions", desc:"We build trust and care for people beyond the transaction." },
+  { name:"Truth with Purpose", desc:"We communicate honestly, courageously, and with good intention." },
+  { name:"Resourcefulness", desc:"We find solutions, create connections, and move things forward." },
+  { name:"Excellence with Accountability", desc:"We take ownership, honor our commitments, and deliver quality." },
+  { name:"Reinvention and Resilience", desc:"We transform challenges into growth and new possibilities." },
+  { name:"Bridge Building", desc:"We connect people, cultures, markets, and opportunities." }
+];
+
+const DEFAULT_GLOSSARY = [
+  { term:"Foundations", desc:"The principles that support every decision you make and every life you build. They are your values, standards, beliefs, and non-negotiables. Foundations rarely change. Everything else is built upon them." },
+  { term:"The Life I'm Building", desc:"A clear description of the life your business is designed to support. Not simply your financial goals. The way you want to live. The freedom you want to create. The relationships you want to protect. The impact you want to leave." },
+  { term:"Focus Areas", desc:"The areas of life and business receiving intentional attention during this season. Focus Areas help prevent distraction by reminding you what deserves your energy right now." },
+  { term:"Catalysts", desc:"The few initiatives capable of creating meaningful progress. Not every task deserves equal attention. Catalysts create disproportionate results." },
+  { term:"Motion", desc:"Work that is actively moving forward. Motion creates momentum. Momentum builds confidence. Confidence creates consistency." },
+  { term:"Rhythms", desc:"The repeatable practices that support long-term success. Rhythms remove dependence on motivation. They become the healthy patterns that sustain your business and your life." },
+  { term:"Horizon", desc:"Ideas that are valuable, but not yet ready. The Horizon protects great ideas from becoming distractions. When the season is right, a Horizon idea becomes a Catalyst." },
+  { term:"Weekly Focus", desc:"The few commitments that deserve your attention this week. Not everything matters equally. Choose intentionally." },
+  { term:"Pulse", desc:"A simple way to measure the health of your business and your life. Measure before problems become visible. A healthy Pulse creates better decisions." },
+  { term:"Challenges", desc:"Questions, obstacles, opportunities, and decisions waiting for clarity. Challenges are not avoided. They are understood, discussed, and transformed into action." },
+  { term:"Reflection", desc:"The intentional pause between one season and the next. Reflection turns experience into wisdom. Every period of Reflection prepares the next Catalyst." }
+];
+
+const QUARTERS = ["Q1","Q2","Q3","Q4"];
+const STAGES = ["rock","process","system"];
+const STAGE_LABELS = {rock:"Catalyst", process:"Motion", system:"Rhythm"};
+const STAGE_CLASS = {rock:"catalyst", process:"process", system:"system"};
+function currentQuarter(){ return "Q"+(Math.floor(new Date().getMonth()/3)+1); }
+const CURRENT_Q = currentQuarter();
+
+const DEFAULT_BOARD = [
+  { id:"b1", text:"Real Estate Pipeline & Past Client Reactivation System.", quarter:CURRENT_Q, stage:"rock" },
+  { id:"b2", text:"Jane Byrd / Global Division Transition and Coaching Proposal.", quarter:CURRENT_Q, stage:"rock" },
+  { id:"b3", text:"Instagram Harmonization and Two-Carousels-Per-Week Publishing System.", quarter:CURRENT_Q, stage:"rock" }
+];
+
+const DEFAULT_IDEAS = [
+  { id:"i1", text:"Explore a Woodlands office/presence, anchored by a top producer there." }
+];
+
+const TWO_WEEKS_MS = 14*24*60*60*1000;
+const STORAGE_KEY = "o58_global_v3";
+
+function loadState(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  let state = null;
+  if(raw){ try{ state = JSON.parse(raw); }catch(e){ state = null; } }
+  if(!state) state = {};
+  Object.keys(DEFAULTS).forEach(k=>{
+    if(!state[k]) state[k] = DEFAULTS[k].map(text=>({text, checked:false}));
+  });
+  if(!state.corevalues) state.corevalues = DEFAULT_VALUES.slice();
+  if(!state.glossary) state.glossary = DEFAULT_GLOSSARY.slice();
+  delete state.definitions;
+  if(!state.board) state.board = DEFAULT_BOARD.slice();
+  if(!state.ideas) state.ideas = DEFAULT_IDEAS.slice();
+  if(!state.todos) state.todos = [];
+  const strayIdeas = state.board.filter(c=>c.stage==="idea");
+  if(strayIdeas.length){
+    strayIdeas.forEach(c=> state.ideas.push({ id:c.id, text:c.text }));
+    state.board = state.board.filter(c=>c.stage!=="idea");
+  }
+  const now = Date.now();
+  state.todos = state.todos.filter(t=> !(t.checked && t.completedAt && (now - t.completedAt) > TWO_WEEKS_MS));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  return state;
+}
+
+let state = loadState();
+function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); updateProgress(); }
+
+function updateProgress(){
+  let total=0, checked=0;
+  Object.keys(DEFAULTS).forEach(key=>{ if(key==="definitions") return; state[key].forEach(it=>{ total++; if(it.checked) checked++; }); });
+  const pct = total ? Math.round((checked/total)*100) : 0;
+  document.getElementById("progressFill").style.width = pct+"%";
+  document.getElementById("progressLabel").textContent = checked+" of "+total+" complete";
+}
+
+function renderSection(key, showCheckbox){
+  if(showCheckbox === undefined) showCheckbox = true;
+  const ul = document.querySelector('ul[data-section="'+key+'"]');
+  ul.innerHTML = "";
+  state[key].forEach((item, idx)=>{
+    const li = document.createElement("li");
+    li.className = "item" + (showCheckbox && item.checked ? " checked":"");
+    if(showCheckbox){
+      const cb = document.createElement("input");
+      cb.type = "checkbox"; cb.checked = item.checked;
+      cb.addEventListener("change", ()=>{ state[key][idx].checked = cb.checked; li.className = "item"+(cb.checked?" checked":""); save(); });
+      li.appendChild(cb);
+    }
+    const txt = document.createElement("div");
+    txt.className = "txt"; txt.contentEditable = "true"; txt.textContent = item.text;
+    txt.addEventListener("blur", ()=>{ state[key][idx].text = txt.textContent; save(); });
+    const del = document.createElement("button");
+    del.className = "del"; del.innerHTML = ICON_X; del.title = "Delete";
+    del.addEventListener("click", ()=>{ state[key].splice(idx,1); renderSection(key, showCheckbox); save(); });
+    li.appendChild(txt); li.appendChild(del);
+    ul.appendChild(li);
+  });
+}
+
+function renderValues(){
+  const container = document.getElementById("values-list");
+  container.innerHTML = "";
+  state.corevalues.forEach((v, idx)=>{
+    const row = document.createElement("div"); row.className = "value-item";
+    const textWrap = document.createElement("div"); textWrap.className = "vtext";
+    const nameEl = document.createElement("div"); nameEl.className = "value-name"; nameEl.contentEditable="true"; nameEl.textContent = v.name;
+    nameEl.addEventListener("blur", ()=>{ state.corevalues[idx].name = nameEl.textContent; save(); });
+    const descEl = document.createElement("div"); descEl.className = "value-desc"; descEl.contentEditable="true"; descEl.textContent = v.desc;
+    descEl.addEventListener("blur", ()=>{ state.corevalues[idx].desc = descEl.textContent; save(); });
+    textWrap.appendChild(nameEl); textWrap.appendChild(descEl);
+    const del = document.createElement("button"); del.className="del"; del.innerHTML=ICON_X; del.title="Delete";
+    del.addEventListener("click", ()=>{ state.corevalues.splice(idx,1); renderValues(); save(); });
+    row.appendChild(textWrap); row.appendChild(del);
+    container.appendChild(row);
+  });
+}
+
+function renderGlossary(){
+  const container = document.getElementById("glossary-list");
+  container.innerHTML = "";
+  state.glossary.forEach((g, idx)=>{
+    const row = document.createElement("div"); row.className = "glossary-item";
+    const textWrap = document.createElement("div"); textWrap.className = "gtext";
+    const nameEl = document.createElement("div"); nameEl.className = "term-name"; nameEl.contentEditable="true"; nameEl.textContent = g.term;
+    nameEl.addEventListener("blur", ()=>{ state.glossary[idx].term = nameEl.textContent; save(); });
+    const descEl = document.createElement("div"); descEl.className = "term-desc"; descEl.contentEditable="true"; descEl.textContent = g.desc;
+    descEl.addEventListener("blur", ()=>{ state.glossary[idx].desc = descEl.textContent; save(); });
+    textWrap.appendChild(nameEl); textWrap.appendChild(descEl);
+    const del = document.createElement("button"); del.className="del"; del.innerHTML=ICON_X; del.title="Delete";
+    del.addEventListener("click", ()=>{ state.glossary.splice(idx,1); renderGlossary(); save(); });
+    row.appendChild(textWrap); row.appendChild(del);
+    container.appendChild(row);
+  });
+}
+
+document.getElementById("add-glossary-btn").addEventListener("click", ()=>{
+  const nameInput = document.getElementById("glossary-name-input");
+  const descInput = document.getElementById("glossary-desc-input");
+  const term = nameInput.value.trim(); const desc = descInput.value.trim();
+  if(!term) return;
+  state.glossary.push({term, desc});
+  nameInput.value = ""; descInput.value = "";
+  renderGlossary(); save();
+});
+
+function renderIdeas(){
+  const ul = document.getElementById("ideas-list");
+  ul.innerHTML = "";
+  state.ideas.forEach((idea, idx)=>{
+    const li = document.createElement("li");
+    li.className = "item";
+
+    const txt = document.createElement("div");
+    txt.className = "txt"; txt.contentEditable = "true"; txt.textContent = idea.text;
+    txt.addEventListener("blur", ()=>{ state.ideas[idx].text = txt.textContent; save(); });
+
+    const toRock = document.createElement("button");
+    toRock.className = "del"; toRock.style.opacity = "1"; toRock.style.color = "var(--olive)";
+    toRock.innerHTML = ICON_ARROW + " Catalyst"; toRock.title = "Bring into this quarter as a Catalyst";
+    toRock.addEventListener("click", ()=>{
+      state.board.push({ id:"c"+Date.now()+Math.random().toString(16).slice(2), text: idea.text, quarter: CURRENT_Q, stage:"rock" });
+      state.ideas.splice(idx,1);
+      renderIdeas(); renderBoard(); save();
+    });
+
+    const del = document.createElement("button");
+    del.className = "del"; del.innerHTML = ICON_X; del.title = "Delete";
+    del.addEventListener("click", ()=>{ state.ideas.splice(idx,1); renderIdeas(); save(); });
+
+    li.appendChild(txt); li.appendChild(toRock); li.appendChild(del);
+    ul.appendChild(li);
+  });
+}
+
+document.getElementById("idea-add-btn").addEventListener("click", ()=>{
+  const input = document.getElementById("idea-input");
+  const val = input.value.trim();
+  if(!val) return;
+  state.ideas.push({ id:"i"+Date.now()+Math.random().toString(16).slice(2), text: val });
+  input.value = "";
+  renderIdeas(); save();
+});
+document.getElementById("idea-input").addEventListener("keydown", (e)=>{
+  if(e.key === "Enter"){ e.preventDefault(); document.getElementById("idea-add-btn").click(); }
+});
+
+function renderTodos(){
+  const now = Date.now();
+  state.todos = state.todos.filter(t=> !(t.checked && t.completedAt && (now - t.completedAt) > TWO_WEEKS_MS));
+  const ul = document.getElementById("todo-list");
+  ul.innerHTML = "";
+  state.todos.forEach((item, idx)=>{
+    const li = document.createElement("li");
+    li.className = "item" + (item.checked ? " checked":"");
+    const cb = document.createElement("input");
+    cb.type = "checkbox"; cb.checked = !!item.checked;
+    cb.addEventListener("change", ()=>{
+      state.todos[idx].checked = cb.checked;
+      state.todos[idx].completedAt = cb.checked ? Date.now() : null;
+      li.className = "item" + (cb.checked ? " checked":"");
+      save();
+    });
+    const txt = document.createElement("div");
+    txt.className = "txt"; txt.contentEditable = "true"; txt.textContent = item.text;
+    txt.addEventListener("blur", ()=>{ state.todos[idx].text = txt.textContent; save(); });
+    const del = document.createElement("button");
+    del.className = "del"; del.innerHTML = ICON_X; del.title = "Delete";
+    del.addEventListener("click", ()=>{ state.todos.splice(idx,1); renderTodos(); save(); });
+    li.appendChild(cb); li.appendChild(txt); li.appendChild(del);
+    ul.appendChild(li);
+  });
+}
+
+document.getElementById("todo-add-btn").addEventListener("click", ()=>{
+  const input = document.getElementById("todo-input");
+  const val = input.value.trim();
+  if(!val) return;
+  state.todos.push({ text: val, checked:false, completedAt:null });
+  input.value = "";
+  renderTodos(); save();
+});
+document.getElementById("todo-input").addEventListener("keydown", (e)=>{
+  if(e.key === "Enter"){ e.preventDefault(); document.getElementById("todo-add-btn").click(); }
+});
+
+function renderBoard(){
+  const board = document.getElementById("global-board");
+  board.innerHTML = "";
+  board.appendChild(document.createElement("div"));
+  STAGES.forEach(st=>{
+    const h = document.createElement("div");
+    h.className = "board-headcell " + STAGE_CLASS[st];
+    h.textContent = STAGE_LABELS[st];
+    board.appendChild(h);
+  });
+  QUARTERS.forEach(q=>{
+    const qlabel = document.createElement("div");
+    qlabel.className = "board-qlabel" + (q===CURRENT_Q ? " current":"");
+    qlabel.textContent = q;
+    board.appendChild(qlabel);
+    STAGES.forEach(st=>{
+      const cell = document.createElement("div");
+      cell.className = "cell" + (q===CURRENT_Q ? " current-q":"");
+      cell.dataset.quarter = q;
+      cell.dataset.stage = st;
+      cell.addEventListener("dragover", (e)=>{ e.preventDefault(); cell.classList.add("dragover"); });
+      cell.addEventListener("dragleave", ()=>{ cell.classList.remove("dragover"); });
+      cell.addEventListener("drop", (e)=>{
+        e.preventDefault();
+        cell.classList.remove("dragover");
+        const id = e.dataTransfer.getData("text/plain");
+        const card = state.board.find(c=>c.id===id);
+        if(card){ card.quarter = q; card.stage = st; renderBoard(); save(); }
+      });
+
+      state.board.filter(c=>c.quarter===q && c.stage===st).forEach(card=>{
+        const div = document.createElement("div");
+        div.className = "card " + STAGE_CLASS[st] + (card.done ? " done":"");
+        div.draggable = true;
+        div.addEventListener("dragstart", (e)=>{ e.dataTransfer.setData("text/plain", card.id); });
+
+        const top = document.createElement("div");
+        top.className = "card-top";
+        const doneCb = document.createElement("input");
+        doneCb.type = "checkbox"; doneCb.checked = !!card.done; doneCb.title = "Mark done";
+        doneCb.addEventListener("change", ()=>{ card.done = doneCb.checked; div.classList.toggle("done", card.done); save(); });
+
+        const txt = document.createElement("div");
+        txt.className = "card-txt"; txt.contentEditable = "true"; txt.textContent = card.text;
+        txt.addEventListener("blur", ()=>{ card.text = txt.textContent; save(); });
+        top.appendChild(doneCb);
+        top.appendChild(txt);
+
+        const controls = document.createElement("div");
+        controls.className = "card-controls";
+        const stIdx = STAGES.indexOf(card.stage);
+        if(stIdx < STAGES.length-1){
+          const adv = document.createElement("button");
+          adv.className = "adv"; adv.innerHTML = ICON_ARROW + " " + STAGE_LABELS[STAGES[stIdx+1]]; adv.title = "Advance to next stage";
+          adv.addEventListener("click", ()=>{ card.stage = STAGES[stIdx+1]; renderBoard(); save(); });
+          controls.appendChild(adv);
+        }
+        const delc = document.createElement("button");
+        delc.className = "delc"; delc.innerHTML = ICON_X; delc.title = "Delete";
+        delc.addEventListener("click", ()=>{ state.board = state.board.filter(c=>c.id!==card.id); renderBoard(); save(); });
+        controls.appendChild(delc);
+
+        div.appendChild(top);
+        div.appendChild(controls);
+        cell.appendChild(div);
+      });
+
+      const addWrap = document.createElement("div");
+      addWrap.className = "cell-add";
+      const addInput = document.createElement("input");
+      addInput.type = "text";
+      addInput.placeholder = "+ add";
+      const commitAdd = ()=>{
+        const val = addInput.value.trim();
+        if(!val) return;
+        state.board.push({ id:"c"+Date.now()+Math.random().toString(16).slice(2), text:val, quarter:q, stage:st, done:false });
+        addInput.value = "";
+        renderBoard(); save();
+      };
+      addInput.addEventListener("keydown", (e)=>{
+        if(e.key === "Enter"){ e.preventDefault(); commitAdd(); }
+      });
+      addInput.addEventListener("blur", commitAdd);
+      addWrap.appendChild(addInput);
+      cell.appendChild(addWrap);
+
+      board.appendChild(cell);
+    });
+  });
+}
+
+function renderAll(){
+  Object.keys(DEFAULTS).forEach(key=> renderSection(key));
+  renderValues();
+  renderGlossary();
+  renderIdeas();
+  renderTodos();
+  renderBoard();
+  updateProgress();
+}
+
+document.querySelectorAll("[data-add]").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const key = btn.getAttribute("data-add");
+    const input = document.querySelector('input[data-target="'+key+'"]');
+    const val = input.value.trim();
+    if(!val) return;
+    state[key].push({text:val, checked:false});
+    input.value = "";
+    renderSection(key); save();
+  });
+});
+document.querySelectorAll('.add-row input[data-target]').forEach(input=>{
+  input.addEventListener("keydown", (e)=>{
+    if(e.key === "Enter"){ e.preventDefault(); const key = input.getAttribute("data-target"); document.querySelector('[data-add="'+key+'"]').click(); }
+  });
+});
+document.getElementById("add-value-btn").addEventListener("click", ()=>{
+  const nameInput = document.getElementById("value-name-input");
+  const descInput = document.getElementById("value-desc-input");
+  const name = nameInput.value.trim(); const desc = descInput.value.trim();
+  if(!name) return;
+  state.corevalues.push({name, desc});
+  nameInput.value = ""; descInput.value = "";
+  renderValues(); save();
+});
+
+renderAll();
+
+/* ================= BUSINESS PLAN 2026 (isolated scope) ================= */
+(function(){
+  const ICON_X = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
+  const STORAGE_KEY = "biz_plan_2026_v1";
+  const SB_URL = 'https://kiqxkbwnfqlkeaexqihl.supabase.co';
+  const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpcXhrYnduZnFsa2VhZXhxaWhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyNjYwOTEsImV4cCI6MjA5NTg0MjA5MX0.1n8CV8zzRbk_HMeUvwx3mjyzZNPiBcGvBRvaGZgnECE';
+  let sbClient = null;
+  function getSB(){
+    if(sbClient) return sbClient;
+    try {
+      // Try different ways Supabase JS might be exposed
+      const sb = window.supabase || window.Supabase;
+      if(sb && sb.createClient){
+        sbClient = sb.createClient(SB_URL, SB_KEY);
+      } else if(typeof createClient !== 'undefined'){
+        sbClient = createClient(SB_URL, SB_KEY);
+      }
+    } catch(e){ console.warn('Supabase init failed:', e); }
+    return sbClient;
+  }
+  const LISTING_STATUSES = ["Coming Soon","Active","Under Contract","Pending","Closed"];
+  const BUYER_STATUSES = ["Searching","Under Contract","Pending","Closed"];
+  const LEASE_STATUSES = ["Available","Showing","Application Pending","Leased","Closed"];
+
+  const DEFAULT_STATE = {
+    income1: {
+      gciGoal: 350000, listingsPct: 65, buyersPct: 35,
+      listings: { avgPrice: 450000, commPct: 2.5, splitPct: 100, closePct: 90 },
+      buyers:   { avgPrice: 400000, commPct: 3,   splitPct: 100, closePct: 90 }
+    },
+    activityMeta: { apptsPerSale: 4, touchesPerAppt: 25 },
+    activities: [
+      { name:"Latitude 58 Newsletter (monthly cross-border content)", pct: 15 },
+      { name:"The Note (weekly email)", pct: 15 },
+      { name:"\"Uncomfortable Questions\" Instagram Carousels", pct: 15 },
+      { name:"Past-Client Calls & Personal Touches", pct: 20 },
+      { name:"Referral Follow-ups (Agent + Personal)", pct: 15 },
+      { name:"Spanish-Language Coaching / Broker Outreach", pct: 10 },
+      { name:"Open Houses & Listing Marketing", pct: 10 }
+    ],
+    sales: [],
+    pipeline: [],
+    income: [
+      { name:"Commissions from Sales / Leases", amounts:new Array(12).fill(0) },
+      { name:"Referral Fees", amounts:new Array(12).fill(0) },
+      { name:"Bonuses / Incentives", amounts:new Array(12).fill(0) },
+      { name:"Other Income", amounts:new Array(12).fill(0) }
+    ],
+    expenses: [
+      { name:"Advertising & Content", amounts:new Array(12).fill(0) },
+      { name:"Broker / Franchise Fees", amounts:new Array(12).fill(0) },
+      { name:"Business Mileage", amounts:new Array(12).fill(0) },
+      { name:"Cell Phone", amounts:new Array(12).fill(0) },
+      { name:"Client Gifts & Appreciation", amounts:new Array(12).fill(0) },
+      { name:"Global Division / MLS / Board Dues", amounts:new Array(12).fill(0) },
+      { name:"Marketing & Social Ads", amounts:new Array(12).fill(0) },
+      { name:"Office Supplies", amounts:new Array(12).fill(0) },
+      { name:"Continuing Education", amounts:new Array(12).fill(0) },
+      { name:"Postage & Shipping", amounts:new Array(12).fill(0) },
+      { name:"Printing", amounts:new Array(12).fill(0) },
+      { name:"Software & Subscriptions", amounts:new Array(12).fill(0) },
+      { name:"Other Expense", amounts:new Array(12).fill(0) }
+    ]
+  };
+
+  function loadState(){
+    const raw = localStorage.getItem(STORAGE_KEY);
+    let s = null;
+    if(raw){ try{ s = JSON.parse(raw); }catch(e){ s = null; } }
+    if(!s) s = JSON.parse(JSON.stringify(DEFAULT_STATE));
+    if(!s.pipeline) s.pipeline = [];
+    return s;
+  }
+  let state = loadState();
+
+  // Load from Supabase and merge — async, runs after initial render
+  async function loadFromSupabase(){
+    const SB = 'https://kiqxkbwnfqlkeaexqihl.supabase.co';
+    const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpcXhrYnduZnFsa2VhZXhxaWhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyNjYwOTEsImV4cCI6MjA5NTg0MjA5MX0.1n8CV8zzRbk_HMeUvwx3mjyzZNPiBcGvBRvaGZgnECE';
+    const h = {'apikey': KEY, 'Authorization': 'Bearer ' + KEY};
+    try {
+      const [salesRes, pipeRes] = await Promise.all([
+        fetch(SB+'/rest/v1/goals_2026_sales?order=date', {headers: h}).then(r=>r.json()),
+        fetch(SB+'/rest/v1/goals_2026_pipeline?order=created_at', {headers: h}).then(r=>r.json())
+      ]);
+      if(Array.isArray(salesRes) && salesRes.length > 0){
+        state.sales = salesRes.map(r => ({
+          _id: r.id,
+          date: r.date||'',
+          property: r.property||'',
+          price: Number(r.price)||0,
+          commPct: Number(r.comm_pct)||0,
+          commission: Number(r.commission)||0,
+          source: r.source||'',
+          role: r.role||''
+        }));
+      }
+      if(Array.isArray(pipeRes) && pipeRes.length > 0){
+        state.pipeline = pipeRes.map(r => ({
+          _id: r.id,
+          property: r.property||'',
+          type: r.type||'Listing',
+          status: r.status||'Active',
+          price: Number(r.price)||0,
+          commPct: Number(r.comm_pct)||0,
+          commission: Number(r.commission)||0,
+          closeDate: r.close_date||''
+        }));
+      }
+      renderSales(); renderPipeline(); computeProgress();
+    } catch(e){ console.warn('Supabase load failed:', e); }
+  }
+
+  async function savePlan(){
+    // Save plan metadata to Supabase
+    const sb = getSB(); if(!sb) return;
+    const planData = {
+      income1: state.income1,
+      activityMeta: state.activityMeta,
+      activities: state.activities
+    };
+    await sb.from('goals_2026_plan').upsert({id:'main', data: planData, updated_at: new Date().toISOString()});
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); // keep localStorage in sync
+  }
+
+  async function saveSaleToSB(sale){
+    const sb = getSB(); if(!sb) return null;
+    const row = {date: sale.date, property: sale.property, price: sale.price||0, comm_pct: sale.commPct||0, commission: sale.commission||0, source: sale.source||'', role: sale.role||''};
+    if(sale._id){
+      await sb.from('goals_2026_sales').update(row).eq('id', sale._id);
+      return sale._id;
+    } else {
+      const {data} = await sb.from('goals_2026_sales').insert(row).select('id').maybeSingle();
+      return data?.id;
+    }
+  }
+
+  async function deleteSaleFromSB(id){ const sb = getSB(); if(sb && id) await sb.from('goals_2026_sales').delete().eq('id', id); }
+
+  async function savePipelineToSB(deal){
+    const sb = getSB(); if(!sb) return null;
+    const row = {property: deal.property, type: deal.type||'Listing', status: deal.status||'Active', price: deal.price||0, comm_pct: deal.commPct||0, commission: deal.commission||0, close_date: deal.closeDate||''};
+    if(deal._id){
+      await sb.from('goals_2026_pipeline').update(row).eq('id', deal._id);
+      return deal._id;
+    } else {
+      const {data} = await sb.from('goals_2026_pipeline').insert(row).select('id').maybeSingle();
+      return data?.id;
+    }
+  }
+
+  async function deletePipelineFromSB(id){ const sb = getSB(); if(sb && id) await sb.from('goals_2026_pipeline').delete().eq('id', id); }
+
+  function save(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    savePlan(); // async, non-blocking
+  }
+
+  function fmt$(n){ if(!isFinite(n)) return "—"; return "$"+Math.round(n).toLocaleString("en-US"); }
+  function fmtN(n, d){ if(!isFinite(n)) return "—"; return n.toLocaleString("en-US",{minimumFractionDigits:d||0,maximumFractionDigits:d||0}); }
+
+  function attachMoneyInput(inp, initialVal, onCommit){
+    inp.type = "text";
+    inp.inputMode = "decimal";
+    inp.value = initialVal ? Number(initialVal).toLocaleString("en-US",{maximumFractionDigits:2}) : "";
+    inp.addEventListener("focus", ()=>{ inp.value = inp.value.replace(/,/g,""); });
+    inp.addEventListener("input", ()=>{
+      let v = inp.value.replace(/[^0-9.]/g,"");
+      const parts = v.split(".");
+      if(parts.length>2) v = parts[0]+"."+parts.slice(1).join("");
+      inp.value = v;
+      onCommit(parseFloat(v)||0);
+    });
+    inp.addEventListener("blur", ()=>{
+      const n = parseFloat(inp.value.replace(/,/g,""))||0;
+      inp.value = n ? n.toLocaleString("en-US",{maximumFractionDigits:2}) : "";
+    });
+  }
+
+  document.querySelectorAll("#maintab-businessplan .tab-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.querySelectorAll("#maintab-businessplan .tab-btn").forEach(b=>b.classList.remove("active"));
+      document.querySelectorAll("#maintab-businessplan .tab-panel").forEach(p=>p.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById("tab-"+btn.dataset.tab).classList.add("active");
+    });
+  });
+
+  function bindNum(id, getVal, setVal, isMoney){
+    const el = document.getElementById(id);
+    if(isMoney){
+      attachMoneyInput(el, getVal(), (num)=>{ setVal(num); save(); computeIncomeGoals(); });
+    } else {
+      el.value = getVal();
+      el.addEventListener("input", ()=>{ setVal(parseFloat(el.value)||0); save(); computeIncomeGoals(); });
+    }
+  }
+
+  function initIncomeGoals(){
+    const s = state.income1;
+    bindNum("in-gciGoal", ()=>s.gciGoal, v=>s.gciGoal=v, true);
+    bindNum("in-listingsPct", ()=>s.listingsPct, v=>s.listingsPct=v);
+    bindNum("in-buyersPct", ()=>s.buyersPct, v=>s.buyersPct=v);
+    bindNum("in-l-avgPrice", ()=>s.listings.avgPrice, v=>s.listings.avgPrice=v, true);
+    bindNum("in-l-commPct", ()=>s.listings.commPct, v=>s.listings.commPct=v);
+    bindNum("in-l-splitPct", ()=>s.listings.splitPct, v=>s.listings.splitPct=v);
+    bindNum("in-l-closePct", ()=>s.listings.closePct, v=>s.listings.closePct=v);
+    bindNum("in-b-avgPrice", ()=>s.buyers.avgPrice, v=>s.buyers.avgPrice=v, true);
+    bindNum("in-b-commPct", ()=>s.buyers.commPct, v=>s.buyers.commPct=v);
+    bindNum("in-b-splitPct", ()=>s.buyers.splitPct, v=>s.buyers.splitPct=v);
+    bindNum("in-b-closePct", ()=>s.buyers.closePct, v=>s.buyers.closePct=v);
+    computeIncomeGoals();
+  }
+
+  function computeIncomeGoals(){
+    const s = state.income1;
+    const segs = { l: { pct:s.listingsPct, cfg:s.listings, prefix:"l" }, b:{ pct:s.buyersPct, cfg:s.buyers, prefix:"b" } };
+    let totalUnits=0, totalVolume=0, totalNet=0;
+    Object.values(segs).forEach(seg=>{
+      const gciShare = s.gciGoal * (seg.pct/100);
+      const perDeal = seg.cfg.avgPrice * (seg.cfg.commPct/100);
+      const net = gciShare * (seg.cfg.splitPct/100);
+      const unitsClosed = perDeal>0 ? gciShare/perDeal : 0;
+      const unitsTaken = seg.cfg.closePct>0 ? unitsClosed/(seg.cfg.closePct/100) : unitsClosed;
+      document.getElementById("out-"+seg.prefix+"-gci").textContent = fmt$(gciShare);
+      document.getElementById("out-"+seg.prefix+"-perdeal").textContent = fmt$(perDeal);
+      document.getElementById("out-"+seg.prefix+"-net").textContent = fmt$(net);
+      document.getElementById("out-"+seg.prefix+"-units").textContent = fmtN(unitsClosed,1);
+      document.getElementById("out-"+seg.prefix+"-taken").textContent = fmtN(unitsTaken,1);
+      totalUnits += unitsClosed;
+      totalVolume += unitsClosed * seg.cfg.avgPrice;
+      totalNet += net;
+    });
+    document.getElementById("out-total-units").textContent = fmtN(totalUnits,1);
+    document.getElementById("out-monthly-units").textContent = fmtN(totalUnits/12,2);
+    document.getElementById("out-total-volume").textContent = fmt$(totalVolume);
+    document.getElementById("out-total-net").textContent = fmt$(totalNet);
+    window.__totalUnitsClosed = totalUnits;
+    renderActivities();
+    computeProgress();
+  }
+
+  function computeProgress(){
+    const goalEl = document.getElementById("out-prog-goal");
+    if(!goalEl) return;
+    const goal = state.income1.gciGoal || 0;
+    let closedComm = 0; state.sales.forEach(r=> closedComm += (r.commission||0));
+    let pipelineComm = 0; state.pipeline.forEach(r=> pipelineComm += (r.commission||0));
+    const gap = Math.max(goal - closedComm - pipelineComm, 0);
+
+    goalEl.textContent = fmt$(goal);
+    document.getElementById("out-prog-closed").textContent = fmt$(closedComm);
+    document.getElementById("out-prog-pipeline").textContent = fmt$(pipelineComm);
+    document.getElementById("out-prog-gap").textContent = fmt$(gap);
+
+    const unitsGoal = window.__totalUnitsClosed || 0;
+    const unitsClosed = state.sales.length;
+    const unitsPipeline = state.pipeline.length;
+    const unitsGap = Math.max(unitsGoal - unitsClosed - unitsPipeline, 0);
+
+    document.getElementById("out-prog-units-goal").textContent = fmtN(unitsGoal,1);
+    document.getElementById("out-prog-units-closed").textContent = fmtN(unitsClosed,0);
+    document.getElementById("out-prog-units-pipeline").textContent = fmtN(unitsPipeline,0);
+    document.getElementById("out-prog-units-gap").textContent = fmtN(unitsGap,1);
+  }
+
+  function initActivityMeta(){
+    const m = state.activityMeta;
+    const a = document.getElementById("in-apptsPerSale");
+    const t = document.getElementById("in-touchesPerAppt");
+    a.value = m.apptsPerSale; t.value = m.touchesPerAppt;
+    a.addEventListener("input", ()=>{ m.apptsPerSale = parseFloat(a.value)||0; save(); renderActivities(); });
+    t.addEventListener("input", ()=>{ m.touchesPerAppt = parseFloat(t.value)||0; save(); renderActivities(); });
+  }
+
+  function renderActivities(){
+    const totalUnits = window.__totalUnitsClosed || 0;
+    const m = state.activityMeta;
+    const apptsYear = totalUnits * m.apptsPerSale;
+    const apptsMonth = apptsYear/12;
+    const touchesYear = apptsYear * m.touchesPerAppt;
+    const touchesWeek = touchesYear/52;
+
+    document.getElementById("out-appts-year").textContent = fmtN(apptsYear,1);
+    document.getElementById("out-appts-month").textContent = fmtN(apptsMonth,1);
+    document.getElementById("out-touches-year").textContent = fmtN(touchesYear,0);
+    document.getElementById("out-touches-week").textContent = fmtN(touchesWeek,1);
+
+    const tbody = document.getElementById("activity-tbody");
+    tbody.innerHTML = "";
+    let pctSum = 0;
+    state.activities.forEach((act, idx)=>{
+      pctSum += act.pct;
+      const tr = document.createElement("tr");
+
+      const tdName = document.createElement("td");
+      const nameDiv = document.createElement("div");
+      nameDiv.className = "act-name"; nameDiv.contentEditable = "true"; nameDiv.textContent = act.name;
+      nameDiv.addEventListener("blur", ()=>{ state.activities[idx].name = nameDiv.textContent; save(); });
+      tdName.appendChild(nameDiv);
+
+      const tdPct = document.createElement("td");
+      const pctInput = document.createElement("input");
+      pctInput.type="number"; pctInput.className="pct-input"; pctInput.value = act.pct; pctInput.step="1";
+      pctInput.addEventListener("input", ()=>{ state.activities[idx].pct = parseFloat(pctInput.value)||0; save(); renderActivities(); });
+      tdPct.appendChild(pctInput);
+
+      const yearTouches = touchesYear * (act.pct/100);
+      const tdYear = document.createElement("td"); tdYear.className="computed"; tdYear.textContent = fmtN(yearTouches,0);
+      const tdMonth = document.createElement("td"); tdMonth.className="computed"; tdMonth.textContent = fmtN(yearTouches/12,1);
+      const tdWeek = document.createElement("td"); tdWeek.className="computed"; tdWeek.textContent = fmtN(yearTouches/52,1);
+
+      const tdDel = document.createElement("td");
+      const delBtn = document.createElement("button"); delBtn.className="act-del"; delBtn.innerHTML=ICON_X;
+      delBtn.addEventListener("click", ()=>{ state.activities.splice(idx,1); save(); renderActivities(); });
+      tdDel.appendChild(delBtn);
+
+      tr.appendChild(tdName); tr.appendChild(tdPct); tr.appendChild(tdYear); tr.appendChild(tdMonth); tr.appendChild(tdWeek); tr.appendChild(tdDel);
+      tbody.appendChild(tr);
+    });
+
+    const totalTr = document.createElement("tr");
+    totalTr.className = "total-row";
+    totalTr.innerHTML = `<td>Total</td><td>${fmtN(pctSum,0)}%</td><td>${fmtN(touchesYear*(pctSum/100),0)}</td><td colspan="2"></td><td></td>`;
+    tbody.appendChild(totalTr);
+  }
+
+  document.getElementById("activity-add-btn").addEventListener("click", ()=>{
+    const input = document.getElementById("activity-input");
+    const val = input.value.trim();
+    if(!val) return;
+    state.activities.push({ name: val, pct: 0 });
+    input.value = "";
+    save(); renderActivities();
+  });
+  document.getElementById("activity-input").addEventListener("keydown",(e)=>{
+    if(e.key==="Enter"){ e.preventDefault(); document.getElementById("activity-add-btn").click(); }
+  });
+
+  function openPicker(inp){
+    inp.addEventListener("click", ()=>{ if(inp.showPicker){ try{ inp.showPicker(); }catch(e){} } });
+  }
+
+  function buildSalesRow(row, idx){
+    const tr = document.createElement("tr");
+
+    const dateTd = document.createElement("td");
+    const dateInp = document.createElement("input"); dateInp.type="date"; dateInp.value = row.date || "";
+    dateInp.addEventListener("input", ()=>{ state.sales[idx].date = dateInp.value; save(); });
+    openPicker(dateInp);
+    dateTd.appendChild(dateInp); tr.appendChild(dateTd);
+
+    const propTd = document.createElement("td");
+    const propInp = document.createElement("input"); propInp.type="text"; propInp.placeholder="Property / Client"; propInp.value = row.property || "";
+    propInp.addEventListener("input", ()=>{ state.sales[idx].property = propInp.value; save(); });
+    propTd.appendChild(propInp); tr.appendChild(propTd);
+
+    const priceTd = document.createElement("td");
+    const priceInp = document.createElement("input");
+    priceInp.placeholder = row.role==="Lease" ? "Monthly Rent" : "Sale Price";
+    priceTd.appendChild(priceInp); tr.appendChild(priceTd);
+
+    const pctTd = document.createElement("td");
+    const pctInp = document.createElement("input"); pctInp.type="number"; pctInp.step="0.1"; pctInp.placeholder="%"; pctInp.value = row.commPct ?? "";
+    pctTd.appendChild(pctInp); tr.appendChild(pctTd);
+
+    const amtTd = document.createElement("td");
+    const amtInp = document.createElement("input"); amtInp.style.textAlign="right"; amtInp.style.fontFamily="var(--font-serif)"; amtInp.style.fontStyle="italic"; amtInp.style.color="var(--olive-deep)"; amtInp.title="Auto-calculated from Sale Price × Commission % — type here to override with a flat amount.";
+    amtTd.appendChild(amtInp); tr.appendChild(amtTd);
+
+    const recalc = ()=>{
+      const price = parseFloat(priceInp.value.replace(/,/g,""))||0;
+      const pct = parseFloat(pctInp.value)||0;
+      const amt = price*(pct/100);
+      state.sales[idx].price = price;
+      state.sales[idx].commPct = pct;
+      state.sales[idx].commission = amt;
+      amtInp.value = amt ? amt.toLocaleString("en-US",{maximumFractionDigits:2}) : "";
+      save(); renderSalesTotalsOnly();
+    };
+    attachMoneyInput(priceInp, row.price, ()=> recalc());
+    pctInp.addEventListener("input", recalc);
+    attachMoneyInput(amtInp, row.commission, (num)=>{
+      state.sales[idx].commission = num;
+      save(); renderSalesTotalsOnly();
+    });
+
+    const sourceTd = document.createElement("td");
+    const sourceInp = document.createElement("input"); sourceInp.type="text"; sourceInp.placeholder="Source"; sourceInp.value = row.source || "";
+    sourceInp.addEventListener("input", ()=>{ state.sales[idx].source = sourceInp.value; save(); });
+    sourceTd.appendChild(sourceInp); tr.appendChild(sourceTd);
+
+    const roleTd = document.createElement("td");
+    const sel = document.createElement("select");
+    ["Listing Sale","Buyer Sale","Lease"].forEach(opt=>{
+      const o = document.createElement("option"); o.value=opt; o.textContent=opt;
+      if(row.role===opt) o.selected = true;
+      sel.appendChild(o);
+    });
+    sel.addEventListener("change", ()=>{
+      state.sales[idx].role = sel.value;
+      priceInp.placeholder = sel.value==="Lease" ? "Monthly Rent" : "Sale Price";
+      if(sel.value==="Lease" && !(parseFloat(pctInp.value)>0)){
+        pctInp.value = 50;
+        recalc();
+      }
+      save();
+    });
+    roleTd.appendChild(sel); tr.appendChild(roleTd);
+
+    const delTd = document.createElement("td");
+    const delBtn = document.createElement("button"); delBtn.className="act-del"; delBtn.innerHTML=ICON_X;
+    delBtn.addEventListener("click", ()=>{ const s = state.sales[idx]; if(s._id) deleteSaleFromSB(s._id); state.sales.splice(idx,1); save(); renderSales(); });
+    delTd.appendChild(delBtn); tr.appendChild(delTd);
+
+    return tr;
+  }
+
+  function renderSales(){
+    const tbody = document.getElementById("sales-tbody");
+    tbody.innerHTML = "";
+    state.sales.forEach((row, idx)=> tbody.appendChild(buildSalesRow(row, idx)));
+    renderSalesTotalsOnly();
+  }
+  function renderSalesTotalsOnly(){
+    let totalPrice=0, totalComm=0;
+    state.sales.forEach(row=>{ totalPrice += (row.price||0); totalComm += (row.commission||0); });
+    document.getElementById("sales-total-price").textContent = fmt$(totalPrice);
+    document.getElementById("sales-total-comm").textContent = fmt$(totalComm);
+    const goal = state.income1.gciGoal || 0;
+    document.getElementById("sales-pct-goal").textContent = goal ? (Math.round((totalComm/goal)*1000)/10)+"%" : "—";
+    computeProgress();
+  }
+  document.getElementById("sales-add-btn").addEventListener("click", ()=>{
+    const newSale = { date:"", property:"", price:0, commPct:0, commission:0, source:"", role:"Listing Sale" };
+    state.sales.push(newSale);
+    saveSaleToSB(newSale).then(id => { if(id) newSale._id = id; });
+    save(); renderSales();
+  });
+
+  function buildPipelineRow(row, idx){
+    const tr = document.createElement("tr");
+
+    const propTd = document.createElement("td");
+    const propInp = document.createElement("input"); propInp.type="text"; propInp.placeholder="Property / Client"; propInp.value = row.property || "";
+    propInp.addEventListener("input", ()=>{ state.pipeline[idx].property = propInp.value; save(); });
+    propTd.appendChild(propInp); tr.appendChild(propTd);
+
+    const typeTd = document.createElement("td");
+    const typeSel = document.createElement("select");
+    ["Listing","Buyer","For Lease"].forEach(opt=>{ const o=document.createElement("option"); o.value=opt; o.textContent=opt; if(row.type===opt) o.selected=true; typeSel.appendChild(o); });
+    typeTd.appendChild(typeSel); tr.appendChild(typeTd);
+
+    const statusTd = document.createElement("td");
+    const statusSel = document.createElement("select");
+    statusTd.appendChild(statusSel); tr.appendChild(statusTd);
+
+    const statusListFor = (type)=> type==="Buyer" ? BUYER_STATUSES : type==="For Lease" ? LEASE_STATUSES : LISTING_STATUSES;
+    const populateStatusOptions = ()=>{
+      const list = statusListFor(typeSel.value);
+      statusSel.innerHTML = "";
+      list.forEach(opt=>{ const o=document.createElement("option"); o.value=opt; o.textContent=opt; statusSel.appendChild(o); });
+      if(list.includes(row.status)){ statusSel.value = row.status; }
+      else { statusSel.value = list[0]; row.status = list[0]; }
+    };
+    populateStatusOptions();
+
+    const priceTd = document.createElement("td");
+    const priceInp = document.createElement("input");
+    priceInp.placeholder = typeSel.value==="For Lease" ? "Monthly Rent" : "Price";
+    priceTd.appendChild(priceInp); tr.appendChild(priceTd);
+
+    const pctTd = document.createElement("td");
+    const pctInp = document.createElement("input"); pctInp.type="number"; pctInp.step="0.1"; pctInp.placeholder="%"; pctInp.value = row.commPct ?? ""; pctInp.style.textAlign="right";
+    pctTd.appendChild(pctInp); tr.appendChild(pctTd);
+
+    const amtTd = document.createElement("td");
+    const amtInp = document.createElement("input"); amtInp.style.textAlign="right"; amtInp.style.fontFamily="var(--font-serif)"; amtInp.style.fontStyle="italic"; amtInp.style.color="var(--terracotta)"; amtInp.title="Auto-calculated from Price × Commission % — type here to override with a flat amount.";
+    amtTd.appendChild(amtInp); tr.appendChild(amtTd);
+
+    const recalc = ()=>{
+      const price = parseFloat(priceInp.value.replace(/,/g,""))||0;
+      const pct = parseFloat(pctInp.value)||0;
+      const amt = price*(pct/100);
+      state.pipeline[idx].price = price;
+      state.pipeline[idx].commPct = pct;
+      state.pipeline[idx].commission = amt;
+      amtInp.value = amt ? amt.toLocaleString("en-US",{maximumFractionDigits:2}) : "";
+      save(); renderPipelineTotalsOnly(); computeProgress();
+    };
+    attachMoneyInput(priceInp, row.price, ()=> recalc());
+    pctInp.addEventListener("input", recalc);
+    attachMoneyInput(amtInp, row.commission, (num)=>{
+      state.pipeline[idx].commission = num;
+      save(); renderPipelineTotalsOnly(); computeProgress();
+    });
+
+    typeSel.addEventListener("change", ()=>{
+      state.pipeline[idx].type = typeSel.value;
+      populateStatusOptions();
+      state.pipeline[idx].status = statusSel.value;
+      priceInp.placeholder = typeSel.value==="For Lease" ? "Monthly Rent" : "Price";
+      if(typeSel.value==="For Lease" && !(parseFloat(pctInp.value)>0)){
+        pctInp.value = 50;
+        recalc();
+      }
+      save(); computeProgress();
+    });
+
+    const moveRowToClosed = ()=>{
+      const mappedRole = row.type==="Buyer" ? "Buyer Sale" : row.type==="For Lease" ? "Lease" : "Listing Sale";
+      state.sales.push({
+        date: row.closeDate || new Date().toISOString().slice(0,10),
+        property: row.property || "",
+        price: row.price || 0,
+        commPct: row.commPct || 0,
+        commission: row.commission || 0,
+        source: "",
+        role: mappedRole
+      });
+      state.pipeline.splice(idx,1);
+      save();
+      renderSales();
+      renderPipeline();
+    };
+    statusSel.addEventListener("change", ()=>{
+      if(statusSel.value === "Closed"){ moveRowToClosed(); return; }
+      state.pipeline[idx].status = statusSel.value;
+      save(); computeProgress();
+    });
+
+    const dateTd = document.createElement("td");
+    const dateInp = document.createElement("input"); dateInp.type="date"; dateInp.value = row.closeDate || "";
+    dateInp.addEventListener("input", ()=>{ state.pipeline[idx].closeDate = dateInp.value; save(); });
+    openPicker(dateInp);
+    dateTd.appendChild(dateInp); tr.appendChild(dateTd);
+
+    const delTd = document.createElement("td");
+    const delBtn = document.createElement("button"); delBtn.className="act-del"; delBtn.innerHTML=ICON_X;
+    delBtn.addEventListener("click", ()=>{ const d = state.pipeline[idx]; if(d._id) deletePipelineFromSB(d._id); state.pipeline.splice(idx,1); save(); renderPipeline(); });
+    delTd.appendChild(delBtn); tr.appendChild(delTd);
+
+    return tr;
+  }
+
+  function renderPipeline(){
+    const tbody = document.getElementById("pipeline-tbody");
+    tbody.innerHTML = "";
+    state.pipeline.forEach((row, idx)=> tbody.appendChild(buildPipelineRow(row, idx)));
+    renderPipelineTotalsOnly();
+    computeProgress();
+  }
+  function renderPipelineTotalsOnly(){
+    let totalComm = 0;
+    state.pipeline.forEach(r=> totalComm += (r.commission||0));
+    document.getElementById("pipeline-total-comm").textContent = fmt$(totalComm);
+  }
+  document.getElementById("pipeline-add-btn").addEventListener("click", ()=>{
+    const newDeal = { property:"", type:"Listing", status:"Active", price:0, commPct:0, commission:0, closeDate:"" };
+    state.pipeline.push(newDeal);
+    savePipelineToSB(newDeal).then(id => { if(id) newDeal._id = id; });
+    save(); renderPipeline();
+  });
+
+  function pnlYearTotal(row){ return row.amounts.reduce((a,b)=>a+(b||0),0); }
+
+  function buildPnlRow(row, idx, isIncome){
+    const tr = document.createElement("tr");
+    const tdCat = document.createElement("td"); tdCat.className="cat";
+    const nameDiv = document.createElement("div"); nameDiv.className="pnl-cat-name"; nameDiv.contentEditable="true"; nameDiv.textContent = row.name;
+    nameDiv.addEventListener("blur", ()=>{ row.name = nameDiv.textContent; save(); });
+    const delBtn = document.createElement("button"); delBtn.className="pnl-del"; delBtn.innerHTML=ICON_X; delBtn.style.float="right";
+    delBtn.addEventListener("click", ()=>{
+      (isIncome ? state.income : state.expenses).splice(idx,1);
+      save(); renderPnL();
+    });
+    tdCat.appendChild(nameDiv); tdCat.appendChild(delBtn);
+    tr.appendChild(tdCat);
+
+    for(let m=0;m<12;m++){
+      const td = document.createElement("td");
+      const inp = document.createElement("input");
+      inp.className="month-input";
+      attachMoneyInput(inp, row.amounts[m], (num)=>{ row.amounts[m] = num; save(); renderPnLTotalsOnly(); });
+      td.appendChild(inp);
+      tr.appendChild(td);
+    }
+    const tdYear = document.createElement("td"); tdYear.className="yearly"; tdYear.textContent = fmt$(pnlYearTotal(row));
+    tr.appendChild(tdYear);
+    return tr;
+  }
+
+  function renderPnL(){
+    const incTbody = document.getElementById("pnl-income-tbody");
+    const expTbody = document.getElementById("pnl-expense-tbody");
+    incTbody.innerHTML = ""; expTbody.innerHTML = "";
+    state.income.forEach((row,idx)=> incTbody.appendChild(buildPnlRow(row, idx, true)));
+    state.expenses.forEach((row,idx)=> expTbody.appendChild(buildPnlRow(row, idx, false)));
+    renderPnLTotalsOnly();
+  }
+
+  function renderPnLTotalsOnly(){
+    const monthlyIncome = new Array(12).fill(0);
+    const monthlyExpense = new Array(12).fill(0);
+    state.income.forEach(row=> row.amounts.forEach((v,m)=> monthlyIncome[m]+= (v||0)));
+    state.expenses.forEach(row=> row.amounts.forEach((v,m)=> monthlyExpense[m]+= (v||0)));
+
+    const fillRow = (elId, monthly, label)=>{
+      const tr = document.getElementById(elId);
+      tr.innerHTML = `<td class="cat">${label}</td>`;
+      let total = 0;
+      monthly.forEach(v=>{ total += v; const td=document.createElement("td"); td.textContent = fmt$(v); tr.appendChild(td); });
+      const tdYear = document.createElement("td"); tdYear.className="yearly"; tdYear.textContent = fmt$(total); tr.appendChild(tdYear);
+      return total;
+    };
+
+    fillRow("pnl-total-income-row", monthlyIncome, "Total Income");
+    fillRow("pnl-total-expense-row", monthlyExpense, "Total Expenses");
+
+    const profitTr = document.getElementById("pnl-profit-row");
+    profitTr.innerHTML = `<td class="cat">Net Profit</td>`;
+    let totalProfit = 0;
+    for(let m=0;m<12;m++){
+      const p = monthlyIncome[m]-monthlyExpense[m];
+      totalProfit += p;
+      const td = document.createElement("td"); td.textContent = fmt$(p); profitTr.appendChild(td);
+    }
+    const tdYearP = document.createElement("td"); tdYearP.className="yearly"; tdYearP.textContent = fmt$(totalProfit); profitTr.appendChild(tdYearP);
+  }
+
+  document.getElementById("pnl-income-add-btn").addEventListener("click", ()=>{
+    const input = document.getElementById("pnl-income-input");
+    const val = input.value.trim();
+    if(!val) return;
+    state.income.push({ name: val, amounts:new Array(12).fill(0) });
+    input.value = ""; save(); renderPnL();
+  });
+  document.getElementById("pnl-expense-add-btn").addEventListener("click", ()=>{
+    const input = document.getElementById("pnl-expense-input");
+    const val = input.value.trim();
+    if(!val) return;
+    state.expenses.push({ name: val, amounts:new Array(12).fill(0) });
+    input.value = ""; save(); renderPnL();
+  });
+
+  initIncomeGoals();
+  initActivityMeta();
+  renderSales();
+  renderPipeline();
+  renderPnL();
+  // Expose to global scope so showApp() can call it after unlock
+  window.loadFromSupabase = loadFromSupabase;
+})();
+</script>
+</body>
+</html>
